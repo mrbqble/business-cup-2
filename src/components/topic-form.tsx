@@ -5,11 +5,12 @@ import { useState, type FormEvent } from "react";
 
 import { MAX_TOPIC_LENGTH, MIN_TOPIC_LENGTH } from "@/lib/case/topic";
 import { useMe } from "@/lib/client/me";
+import { READY_TOPICS } from "@/lib/client/ready-topics";
 
 import { PaywallSheet } from "./paywall-sheet";
 import { Button } from "./ui";
 
-const EXAMPLES = ["The Rosetta Stone", "The Antikythera mechanism", "The discovery of penicillin", "The Great Moon Hoax of 1835"];
+
 
 export function TopicForm() {
   const router = useRouter();
@@ -62,12 +63,12 @@ export function TopicForm() {
         </p>
       )}
       <div className="flex flex-wrap gap-2" aria-label="Example topics">
-        {EXAMPLES.map((example) => (
+        {READY_TOPICS.map((example) => (
           <button
             key={example}
             type="button"
             onClick={() => start(example)}
-            className="rounded-full border border-border bg-surface-muted px-3 py-1.5 text-sm hover:border-accent"
+            className="inline-flex min-h-11 items-center rounded-full border border-border bg-surface-muted px-3 text-sm hover:border-accent"
           >
             {example}
           </button>

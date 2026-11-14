@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
+import { caseLabel } from "@/lib/case/label";
 import type { CaseSummary, NarrationView } from "@/lib/case/view";
 import type { Exhibit } from "@/lib/sources/exhibits";
 
@@ -50,7 +51,7 @@ export function IntroPanels({
 
   const cover = exhibits[0] ?? null;
   const second = exhibits[1] ?? cover;
-  const kicker = `${summary.kind === "daily" && summary.number ? `Daily Case #${summary.number}` : "Case on request"} · ${summary.era}`;
+  const kicker = `${caseLabel(summary)} · ${summary.era}`;
 
   return (
     <section aria-label="Case briefing" className="mx-auto flex w-full max-w-2xl flex-col gap-4">

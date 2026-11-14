@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { use, useEffect, useMemo, useRef, useState } from "react";
 
+import { caseLabel } from "@/lib/case/label";
 import type { PlayView } from "@/lib/case/view";
 import { api, ApiError, type PlayResponse } from "@/lib/client/api";
 import { refreshMe } from "@/lib/client/me";
@@ -206,8 +207,7 @@ export function CasePlayer({ params }: { params: Promise<{ slug: string }> }) {
     <div className="flex flex-col gap-6">
       <header className="max-w-3xl">
         <p className="font-typewriter text-sm tracking-widest text-muted uppercase">
-          {current.case.kind === "daily" && current.case.number ? `Daily Case #${current.case.number}` : "Case on request"} ·{" "}
-          {current.case.category} · {current.case.era}
+          {caseLabel(current.case)} · {current.case.category} · {current.case.era}
         </p>
         <h1 className="mt-1 font-display text-2xl leading-snug font-semibold sm:text-4xl">{current.case.title}</h1>
       </header>

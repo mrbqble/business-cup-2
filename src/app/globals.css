@@ -211,6 +211,14 @@ body {
   }
 }
 
+@layer base {
+  /* A visible focus ring for keyboard users, in the accent of the surrounding context. */
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
 @layer components {
   /* Paper context: anything printed on paper (cards, clue files, suspect cards). */
   .paper {
