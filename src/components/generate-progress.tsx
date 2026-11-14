@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ApiError, generateCase, type GenerateEvent } from "@/lib/client/api";
+import { READY_TOPICS } from "@/lib/client/ready-topics";
 
 import { PaywallSheet } from "./paywall-sheet";
 
@@ -171,6 +172,24 @@ export function GenerateProgress() {
             Back to the home page
           </Link>
         </ErrorState>
+      )}
+
+      {(outcome.kind === "failed" || outcome.kind === "refused") && (
+        <Card>
+          <p className="text-sm font-semibold">These cases are ready to play right now:</p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {READY_TOPICS.filter((ready) => ready.toLowerCase() !== topic.toLowerCase()).map((ready) => (
+              <li key={ready}>
+                <Link
+                  href={`/new?topic=${encodeURIComponent(ready)}`}
+                  className="inline-flex min-h-11 items-center rounded-full border border-border px-3 text-sm hover:border-accent"
+                >
+                  {ready}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Card>
       )}
 
       {outcome.kind !== "running" && (

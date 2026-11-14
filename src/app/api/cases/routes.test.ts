@@ -181,7 +181,7 @@ describe("POST /api/cases/generate", () => {
       expect(await events(await generate(generateRequest("the rosetta stone!", "198.51.100.2")))).toEqual([{ type: "done", slug: "cached-case" }]);
     }
     expect(createCase).not.toHaveBeenCalled();
-    expect(vi.mocked(findTopicCase).mock.calls[0][0]).toBe("the rosetta stone");
+    expect(vi.mocked(findTopicCase).mock.calls[0][0]).toEqual(["the rosetta stone", "rosetta stone"]);
   });
 
   it("refuses unsafe topics before any model call", async () => {

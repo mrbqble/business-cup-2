@@ -4,7 +4,7 @@ import { AiAllProvidersFailedError, AiRefusalError, AiTimeoutError, getSafetyAi 
 import { GenerationError, type GenerationEvent } from "@/lib/case/generate";
 import { checkTopicRules, checkTopicSafety } from "@/lib/case/safety";
 import { createCase } from "@/lib/case/service";
-import { MAX_TOPIC_LENGTH, normalizeTopic } from "@/lib/case/topic";
+import { MAX_TOPIC_LENGTH, topicLookupKeys } from "@/lib/case/topic";
 import { countTopicCasesCreatedBy, countTopicCasesCreatedOn, findTopicCase, recentTopicCases } from "@/lib/db/cases";
 import { json, jsonError, NO_STORE, readJson, unauthorized } from "@/lib/http";
 import { activePlan, canCreateTopicCase } from "@/lib/player/entitlements";
@@ -40,7 +40,7 @@ export async function POST(request: Request): Promise<Response> {
   const rules = checkTopicRules(topic);
   if (!rules.allowed) return jsonError(422, "topic_refused", rules.reason);
 
-  const cached = await findTopicCase(normalizeTopic(topic));
+  const cached = await findTopicCase(topicLookupKeys(topic));
   if (cached) return ndjson([{ type: "done", slug: cached.slug }]);
 
   if (!canCreateTopicCase(activePlan(player), await countTopicCasesCreatedBy(player.id))) {
@@ -80,7 +80,7 @@ export async function POST(request: Request): Promise<Response> {
       send({ type: "done", slug: record.slug });
     } catch (error) {
       // A simultaneous request for the same topic may have stored it first.
-      const existing = await findTopicCase(normalizeTopic(topic)).catch(() => null);
+      const existing = await findTopicCase(topicLookupKeys(topic)).catch(() => null);
       if (existing) return send({ type: "done", slug: existing.slug });
       console.error("case generation failed", { topic, error });
       send({ type: "failed", ...failureMessage(error) });
