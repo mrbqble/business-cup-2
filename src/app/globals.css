@@ -1,24 +1,67 @@
 @import "tailwindcss";
 
+/* Design tokens: the one place to apply a visual design. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --surface-muted: #efede8;
+  --text: #1c1a17;
+  --muted: #5c574f;
+  --border: #dedad2;
+  --accent: #1f4fd1;
+  --accent-text: #ffffff;
+  --verified: #0f766e;
+  --verified-surface: #e6f4f1;
+  --danger: #b42318;
+  --danger-surface: #fdecea;
+  --success: #15803d;
+  --success-surface: #e8f5ec;
+  --radius: 14px;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: ui-serif, Georgia, "Times New Roman", serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #121110;
+    --surface: #1c1b19;
+    --surface-muted: #262421;
+    --text: #f1eee8;
+    --muted: #a8a197;
+    --border: #36332e;
+    --accent: #7ea2ff;
+    --accent-text: #0f0f10;
+    --verified: #5eead4;
+    --verified-surface: #12302c;
+    --danger: #f97066;
+    --danger-surface: #3a1714;
+    --success: #6ee7a0;
+    --success-surface: #13301f;
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-verified: var(--verified);
+  --color-verified-surface: var(--verified-surface);
+  --color-danger: var(--danger);
+  --color-danger-surface: var(--danger-surface);
+  --color-success: var(--success);
+  --color-success-surface: var(--success-surface);
+  --radius-card: var(--radius);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
 }
