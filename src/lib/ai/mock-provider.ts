@@ -1,7 +1,7 @@
 import "server-only";
 
 import { AiProviderError } from "./errors";
-import type { AiProvider } from "./types";
+import type { AiCompletion, AiProvider } from "./types";
 
 export type MockBehavior =
   | { kind: "succeed"; output?: string }
@@ -19,13 +19,13 @@ export function createMockProvider(
     async complete(request, signal) {
       switch (behavior.kind) {
         case "succeed":
-          return behavior.output ?? `[mock] ${request.prompt}`;
+          return { text: behavior.output ?? `[mock] ${request.prompt}` };
         case "fail":
           throw new AiProviderError(name, behavior.status, `${name} returned ${behavior.status}`);
         case "network":
           throw new TypeError("fetch failed");
         case "hang":
-          return new Promise<string>((_, reject) => {
+          return new Promise<AiCompletion>((_, reject) => {
             signal.addEventListener("abort", () => reject(signal.reason), { once: true });
           });
       }

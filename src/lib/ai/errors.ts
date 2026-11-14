@@ -35,6 +35,25 @@ export class AiAllProvidersFailedError extends Error {
   }
 }
 
+/** The model declined the request. Not retried on another provider: the content is the problem. */
+export class AiRefusalError extends Error {
+  constructor(
+    readonly provider: string,
+    readonly category: string | null,
+  ) {
+    super(`${provider} declined the request${category ? ` (${category})` : ""}`);
+    this.name = "AiRefusalError";
+  }
+}
+
+/** The model answered, but not with output that passes validation. */
+export class AiOutputError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "AiOutputError";
+  }
+}
+
 export class AiConfigError extends Error {
   constructor(message: string) {
     super(message);

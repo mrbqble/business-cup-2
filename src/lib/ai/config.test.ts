@@ -21,6 +21,13 @@ describe("resolveProviders", () => {
   it.each(["constructor", "toString", "__proto__"])("does not resolve the inherited name %s", (name) => {
     expect(() => resolveProviders(name)).toThrow(AiConfigError);
   });
+
+  it("needs ANTHROPIC_API_KEY for the Claude providers", () => {
+    expect(() => resolveProviders("claude-sonnet,claude-haiku", {})).toThrow("ANTHROPIC_API_KEY is not set");
+    expect(
+      resolveProviders("claude-sonnet,claude-haiku", { ANTHROPIC_API_KEY: "test-key" }).map((p) => p.name),
+    ).toEqual(["claude-sonnet", "claude-haiku"]);
+  });
 });
 
 describe("isAiConfigured", () => {
@@ -28,5 +35,6 @@ describe("isAiConfigured", () => {
     expect(isAiConfigured("mock")).toBe(true);
     expect(isAiConfigured("mock,nope")).toBe(false);
     expect(isAiConfigured(undefined)).toBe(false);
+    expect(isAiConfigured("claude-haiku", {})).toBe(false);
   });
 });
