@@ -78,6 +78,23 @@ describe("generateCase", () => {
     expect(provider.complete).not.toHaveBeenCalled();
   });
 
+  it("skips namesake articles about products or media and drops sources no clue cites", async () => {
+    const { provider, ai } = scriptedAi(sampleCase());
+    const articles = fakeWikipedia({
+      [sampleSource.title]: sampleSource.text + filler,
+      "Broad Street (software)": "Broad Street is a note-taking app." + filler,
+      "John Snow": "John Snow was an English physician." + filler,
+    });
+
+    const result = await generateCase("Broad Street", { ai, wikipedia: articles });
+
+    const context = provider.complete.mock.calls[0][0].context ?? "";
+    expect(context).toContain("Source S2: John Snow");
+    expect(context).not.toContain("(software)");
+    expect(result.sources.map((s) => s.title)).toEqual([sampleSource.title]);
+    expect(result.verification.ok).toBe(true);
+  });
+
   it("skips disambiguation pages when choosing sources", async () => {
     const { provider, ai } = scriptedAi(sampleCase());
 

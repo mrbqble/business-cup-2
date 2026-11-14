@@ -41,4 +41,10 @@ describe("slugify", () => {
     expect(slugify("How did Napoleon retake France in 20 days?", () => 0)).toBe("how-did-napoleon-retake-france-in-20-days-0000");
     expect(slugify("Ça va?!", () => 0.5)).toMatch(/^ca-va-[0-9a-z]{4}$/);
   });
+
+  it("cuts a long title at a word boundary", () => {
+    expect(slugify("How did a slab from a fortress wall unlock Egyptian hieroglyphs and change history?", () => 0)).toBe(
+      "how-did-a-slab-from-a-fortress-wall-unlock-egyptian-0000",
+    );
+  });
 });
