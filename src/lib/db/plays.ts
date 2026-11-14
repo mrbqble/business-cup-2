@@ -1,24 +1,51 @@
 import "server-only";
 
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq, ne, sql } from "drizzle-orm";
 
 import { initialState, scoreOf, type GameAction, type GameState } from "@/lib/game/engine";
+import { todayDateKey } from "@/lib/time";
 
 import { getDb } from "./client";
-import { plays, type PlayRow } from "./schema";
+import { cases, plays, type PlayRow } from "./schema";
 
-export async function createPlay(caseId: string): Promise<PlayRow> {
+/** The player's play of a case, created on first start; a second start returns the same play. */
+export async function startPlayerPlay(caseId: string, playerId: string): Promise<{ play: PlayRow; created: boolean }> {
   const state = initialState();
-  const [row] = await getDb()
+  const [created] = await getDb()
     .insert(plays)
-    .values({ caseId, actions: [], status: state.status, score: scoreOf(state), livesLeft: state.livesLeft })
+    .values({ caseId, playerId, actions: [], status: state.status, score: scoreOf(state), livesLeft: state.livesLeft })
+    .onConflictDoNothing({ target: [plays.playerId, plays.caseId] })
     .returning();
-  return row;
+  if (created) return { play: created, created: true };
+  const existing = await findPlayerPlay(caseId, playerId);
+  if (!existing) throw new Error("A conflicting play disappeared");
+  return { play: existing, created: false };
+}
+
+export async function findPlayerPlay(caseId: string, playerId: string): Promise<PlayRow | null> {
+  const [row] = await getDb()
+    .select()
+    .from(plays)
+    .where(and(eq(plays.caseId, caseId), eq(plays.playerId, playerId)))
+    .limit(1);
+  return row ?? null;
 }
 
 export async function findPlay(id: string): Promise<PlayRow | null> {
   const [row] = await getDb().select().from(plays).where(eq(plays.id, id)).limit(1);
   return row ?? null;
+}
+
+/** New York dates on which the player finished that same day's daily case (the input to the streak). */
+export async function finishedDailyDays(playerId: string): Promise<string[]> {
+  const rows = await getDb()
+    .select({ dateKey: cases.dateKey, finishedAt: plays.finishedAt })
+    .from(plays)
+    .innerJoin(cases, eq(cases.id, plays.caseId))
+    .where(and(eq(plays.playerId, playerId), eq(cases.kind, "daily"), ne(plays.status, "in_progress")));
+  return rows.flatMap(({ dateKey, finishedAt }) =>
+    dateKey && finishedAt && todayDateKey(finishedAt) === dateKey ? [dateKey] : [],
+  );
 }
 
 /**

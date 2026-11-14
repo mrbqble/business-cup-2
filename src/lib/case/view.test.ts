@@ -68,6 +68,7 @@ describe("buildPlayView", () => {
     expect(view.clues.every((c) => !c.sealed)).toBe(true);
     expect(view.hypotheses.find((h) => h.id === "h1")?.status).toBe("correct");
     expect(view.result).toEqual({
+      grid: "⬛⬛⬛⬛⬛⬛ ✅",
       correctHypothesisId: "h1",
       solution: record.content.solution,
       sources: [{ title: sampleSource.title, url: sampleSource.url, revisionId: sampleSource.revisionId }],

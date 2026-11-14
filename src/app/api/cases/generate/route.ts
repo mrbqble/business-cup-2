@@ -5,8 +5,10 @@ import { GenerationError, type GenerationEvent } from "@/lib/case/generate";
 import { checkTopicRules, checkTopicSafety } from "@/lib/case/safety";
 import { createCase } from "@/lib/case/service";
 import { MAX_TOPIC_LENGTH, normalizeTopic } from "@/lib/case/topic";
-import { findTopicCase } from "@/lib/db/cases";
-import { jsonError, NO_STORE, readJson } from "@/lib/http";
+import { countTopicCasesCreatedBy, findTopicCase } from "@/lib/db/cases";
+import { jsonError, NO_STORE, readJson, unauthorized } from "@/lib/http";
+import { canCreateTopicCase } from "@/lib/player/entitlements";
+import { authenticate } from "@/lib/player/service";
 import { clientIp, createRateLimiter, tooManyRequests } from "@/lib/rate-limit";
 
 /** Drafting plus up to two repair rounds can take a few minutes on long sources. */
@@ -23,9 +25,12 @@ export type GenerateEvent =
 
 /**
  * Streams NDJSON: progress events while the case is built, then exactly one of done, refused or failed.
- * A topic that already has a case returns it at once without using the rate limit.
+ * A topic that already has a case returns it at once, free and without using the rate limit.
  */
 export async function POST(request: Request): Promise<Response> {
+  const player = await authenticate(request);
+  if (!player) return unauthorized();
+
   const parsed = body.safeParse(await readJson(request));
   if (!parsed.success) return jsonError(400, "invalid_request", "Send { topic }.");
   const topic = parsed.data.topic.trim();
@@ -36,6 +41,14 @@ export async function POST(request: Request): Promise<Response> {
   const cached = await findTopicCase(normalizeTopic(topic));
   if (cached) return ndjson([{ type: "done", slug: cached.slug }]);
 
+  if (!canCreateTopicCase(await countTopicCasesCreatedBy(player.id))) {
+    return jsonError(
+      403,
+      "topic_limit",
+      "You've used your free case on a topic. Unlimited topic cases come with Plus. Today's case is always free.",
+    );
+  }
+
   const decision = limiter.check(clientIp(request.headers));
   if (!decision.allowed) return tooManyRequests(decision);
 
@@ -44,7 +57,12 @@ export async function POST(request: Request): Promise<Response> {
     if (!verdict.allowed) return send({ type: "refused", message: verdict.reason, retryable: verdict.retryable });
 
     try {
-      const record = await createCase({ topic, kind: "topic", onEvent: (event) => send({ type: "progress", ...event }) });
+      const record = await createCase({
+        topic,
+        kind: "topic",
+        createdBy: player.id,
+        onEvent: (event) => send({ type: "progress", ...event }),
+      });
       send({ type: "done", slug: record.slug });
     } catch (error) {
       // A simultaneous request for the same topic may have stored it first.

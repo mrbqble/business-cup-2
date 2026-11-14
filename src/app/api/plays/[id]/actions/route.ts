@@ -1,7 +1,8 @@
 import { z } from "zod";
 
-import { json, jsonError, readJson } from "@/lib/http";
+import { json, jsonError, readJson, unauthorized } from "@/lib/http";
 import { gameActionSchema, performAction, type PlayError } from "@/lib/play/service";
+import { authenticate } from "@/lib/player/service";
 
 const MESSAGES: Record<PlayError, [status: number, message: string]> = {
   case_not_found: [404, "We couldn't find that case."],
@@ -14,14 +15,17 @@ const MESSAGES: Record<PlayError, [status: number, message: string]> = {
   already_ruled_out: [409, "That answer is already ruled out."],
 };
 
+/** Records one move on the player's own play and returns the new server-computed state. */
 export async function POST(request: Request, { params }: RouteContext<"/api/plays/[id]/actions">): Promise<Response> {
+  const player = await authenticate(request);
+  if (!player) return unauthorized();
   const { id } = await params;
   if (!z.uuid().safeParse(id).success) return jsonError(404, "play_not_found", MESSAGES.play_not_found[1]);
 
   const action = gameActionSchema.safeParse(await readJson(request));
   if (!action.success) return jsonError(400, "invalid_request", 'Send { type: "open", clueId } or { type: "accuse", hypothesisId }.');
 
-  const result = await performAction(id, action.data);
+  const result = await performAction(id, player.id, action.data);
   if (!result.ok) {
     const [status, message] = MESSAGES[result.error];
     return jsonError(status, result.error, message);

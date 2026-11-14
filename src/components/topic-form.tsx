@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
 import { MAX_TOPIC_LENGTH, MIN_TOPIC_LENGTH } from "@/lib/case/topic";
+import { useMe } from "@/lib/client/me";
 
 import { Button } from "./ui";
 
@@ -13,6 +14,8 @@ export function TopicForm() {
   const router = useRouter();
   const [topic, setTopic] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const me = useMe();
+  const freeLeft = me.status === "ready" ? Math.max(0, me.me.topicCases.free - me.me.topicCases.created) : null;
 
   function start(value: string) {
     const trimmed = value.trim();
@@ -67,6 +70,13 @@ export function TopicForm() {
           </button>
         ))}
       </div>
+      {freeLeft !== null && (
+        <p className="text-xs text-muted">
+          {freeLeft > 0
+            ? "Your first new case on any topic is free. Topics someone already opened are always free."
+            : "You've used your free new topic case. Unlimited topic cases come with Plus; topics someone already opened stay free."}
+        </p>
+      )}
     </form>
   );
 }

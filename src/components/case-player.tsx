@@ -5,7 +5,7 @@ import { use, useEffect, useMemo, useState } from "react";
 
 import type { PlayView } from "@/lib/case/view";
 import { api, ApiError, type PlayResponse } from "@/lib/client/api";
-import { playKey, storage } from "@/lib/client/storage";
+import { refreshMe } from "@/lib/client/me";
 
 import { CaseResult } from "./case-result";
 import { ClueCard, SealedClue } from "./clue-card";
@@ -19,20 +19,10 @@ type Load =
 
 type Notice = { tone: "info" | "error"; text: string };
 
-/** Resumes this device's play of the case, or starts one. */
+/** Starts this player's play of the case; the server resumes the existing play when there is one. */
 async function resumeOrStart(slug: string): Promise<Load> {
   try {
-    const saved = storage.get(playKey(slug));
-    if (saved) {
-      const resumed = await api.getPlay(saved).catch((error: unknown) => {
-        if (error instanceof ApiError && error.status === 404) return null;
-        throw error;
-      });
-      if (resumed && resumed.view.case.slug === slug) return { status: "ready", ...resumed };
-      storage.remove(playKey(slug));
-    }
     const started = await api.startPlay(slug);
-    storage.set(playKey(slug), started.playId);
     return { status: "ready", ...started };
   } catch (error) {
     const notFound = error instanceof ApiError && error.status === 404;
@@ -89,6 +79,8 @@ export function CasePlayer({ params }: { params: Promise<{ slug: string }> }) {
       const next = await run();
       setLoad({ status: "ready", ...next });
       setNotice({ tone: "info", text: describe(next.view) });
+      // The streak and today's result change when a case ends.
+      if (next.view.status !== "in_progress") void refreshMe();
     } catch (error) {
       if (error instanceof ApiError && (error.code === "conflict" || error.code === "game_over")) {
         const fresh = await api.getPlay(playId).catch(() => null);
@@ -128,7 +120,7 @@ export function CasePlayer({ params }: { params: Promise<{ slug: string }> }) {
         )}
       </div>
 
-      {ended && <CaseResult view={view} clueNumbers={clueNumbers} />}
+      {ended && <CaseResult view={view} playId={playId} clueNumbers={clueNumbers} />}
 
       {!ended && (
         <Card>

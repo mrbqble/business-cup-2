@@ -14,6 +14,8 @@ export interface CreateCaseInput {
   kind: CaseKind;
   /** Required for a daily case: its America/New_York date, YYYY-MM-DD. */
   dateKey?: string;
+  /** The player who asked for a topic case. */
+  createdBy?: string;
   onEvent?: (event: GenerationEvent) => void;
 }
 
@@ -41,6 +43,7 @@ export async function storeCase(generated: GeneratedCase, input: CreateCaseInput
     sources: sources.map(({ id, title, url, revisionId }) => ({ id, title, url, revisionId })),
     verification,
     generation,
+    createdBy: input.createdBy ?? null,
   });
 }
 

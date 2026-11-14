@@ -2,9 +2,11 @@ import Link from "next/link";
 
 import type { PlayView } from "@/lib/case/view";
 
+import { LeaderboardPreview } from "./leaderboard";
+import { ShareResult } from "./share-result";
 import { Card } from "./ui";
 
-export function CaseResult({ view, clueNumbers }: { view: PlayView; clueNumbers: Map<string, number> }) {
+export function CaseResult({ view, playId, clueNumbers }: { view: PlayView; playId: string; clueNumbers: Map<string, number> }) {
   if (!view.result) return null;
   const solved = view.status === "solved";
   const { solution, sources, learned } = view.result;
@@ -17,6 +19,9 @@ export function CaseResult({ view, clueNumbers }: { view: PlayView; clueNumbers:
       <p className="mt-1 text-sm">
         {solved ? `You named the answer with ${view.score} points.` : "You ran out of lives. Here is what the evidence shows."}
       </p>
+
+      <ShareResult view={view} playId={playId} />
+      {view.case.kind === "daily" && <LeaderboardPreview slug={view.case.slug} />}
 
       <h3 className="mt-5 font-semibold">What really happened</h3>
       <ol className="mt-2 flex list-decimal flex-col gap-2 pl-5 text-sm">

@@ -49,6 +49,14 @@ export async function findDailyCase(dateKey: string): Promise<CaseRecord | null>
   return row ? toCaseRecord(row) : null;
 }
 
+export async function countTopicCasesCreatedBy(playerId: string): Promise<number> {
+  const [row] = await getDb()
+    .select({ count: sql<number>`count(*)::int` })
+    .from(cases)
+    .where(and(eq(cases.kind, "topic"), eq(cases.createdBy, playerId)));
+  return row?.count ?? 0;
+}
+
 export async function dailyCaseExists(dateKey: string): Promise<boolean> {
   const [row] = await getDb()
     .select({ id: cases.id })

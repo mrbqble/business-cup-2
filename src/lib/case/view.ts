@@ -1,4 +1,5 @@
 import { rulesFor, scoreOf, visibleClueIds, type GameState, type GameStatus } from "@/lib/game/engine";
+import { shareGrid } from "@/lib/game/share";
 
 import type { CaseCategory, CaseKind, CaseRecord, ClueKind } from "./schema";
 
@@ -39,6 +40,8 @@ export interface HypothesisView {
 }
 
 export interface ResultView {
+  /** Spoiler-free result grid for sharing, e.g. "🔎🔎⬛⬛⬛⬛ ❌✅". */
+  grid: string;
   correctHypothesisId: string;
   solution: { text: string; clueIds: string[] }[];
   sources: { title: string; url: string; revisionId: number }[];
@@ -101,6 +104,7 @@ export function buildPlayView(record: CaseRecord, state: GameState): PlayView {
     hypotheses,
     result: ended
       ? {
+          grid: shareGrid(rules, state),
           correctHypothesisId: rules.correctHypothesisId,
           solution: record.content.solution,
           sources: record.sources.map(({ title, url, revisionId }) => ({ title, url, revisionId })),

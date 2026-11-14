@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import type { CaseSummary } from "@/lib/case/view";
 import { api, ApiError } from "@/lib/client/api";
+import { useMe } from "@/lib/client/me";
 
 import { Card, ErrorState, Spinner } from "./ui";
 
@@ -23,6 +24,7 @@ async function loadToday(): Promise<State> {
 export function TodayCase() {
   const [state, setState] = useState<State>({ status: "loading" });
   const [attempt, setAttempt] = useState(0);
+  const me = useMe();
 
   useEffect(() => {
     let active = true;
@@ -56,6 +58,8 @@ export function TodayCase() {
   }
 
   const { summary } = state;
+  const mine = me.status === "ready" && me.me.today?.slug === summary.slug ? me.me.today : null;
+  const finished = mine?.status === "solved" || mine?.status === "failed";
   return (
     <Card aria-labelledby="today-heading">
       <p className="text-xs font-semibold tracking-wide text-muted uppercase">
@@ -64,12 +68,22 @@ export function TodayCase() {
       <h2 id="today-heading" className="mt-2 font-display text-2xl leading-snug font-semibold">
         {summary.title}
       </h2>
-      <Link
-        href={`/case/${summary.slug}`}
-        className="mt-4 inline-flex min-h-11 items-center rounded-card bg-accent px-4 py-2 text-sm font-semibold text-accent-text hover:opacity-90"
-      >
-        Start the investigation
-      </Link>
+      {finished && (
+        <p className="mt-2 text-sm font-semibold">
+          {mine.status === "solved" ? `You solved it with ${mine.score} points.` : "You closed this case. Come back tomorrow for the next one."}
+        </p>
+      )}
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        <Link
+          href={`/case/${summary.slug}`}
+          className="inline-flex min-h-11 items-center rounded-card bg-accent px-4 py-2 text-sm font-semibold text-accent-text hover:opacity-90"
+        >
+          {finished ? "Review the case" : mine?.status === "in_progress" ? "Continue the investigation" : "Start the investigation"}
+        </Link>
+        <Link href={`/case/${summary.slug}/leaderboard`} className="inline-flex min-h-11 items-center text-sm font-semibold underline">
+          Today&apos;s leaderboard
+        </Link>
+      </div>
     </Card>
   );
 }
