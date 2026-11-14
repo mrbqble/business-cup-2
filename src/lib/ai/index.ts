@@ -2,7 +2,7 @@ import "server-only";
 
 export { createAiClient } from "./client";
 export type { AiClientOptions } from "./client";
-export { generationProviderList, getGenerationAi, getSafetyAi } from "./clients";
+export { generationProviderList, getGenerationAi, getNarrationAi, getSafetyAi } from "./clients";
 export { isAiConfigured, resolveProviders } from "./config";
 export {
   AiAllProvidersFailedError,

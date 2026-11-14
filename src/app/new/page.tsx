@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Building your case" };
 
 export default function NewCasePage() {
   return (
-    <main>
+    <main className="mx-auto w-full max-w-2xl">
       <Suspense fallback={<Spinner label="Loading" />}>
         <GenerateProgress />
       </Suspense>

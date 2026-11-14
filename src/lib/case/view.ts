@@ -1,6 +1,8 @@
 import { rulesFor, scoreOf, visibleClueIds, type GameState, type GameStatus } from "@/lib/game/engine";
 import { shareGrid } from "@/lib/game/share";
+import { significantWords, type Exhibit } from "@/lib/sources/exhibits";
 
+import { fallbackNarration } from "./narration";
 import type { CaseCategory, CaseKind, CaseRecord, ClueKind } from "./schema";
 
 export interface CaseSummary {
@@ -11,6 +13,8 @@ export interface CaseSummary {
   title: string;
   category: CaseCategory;
   era: string;
+  /** The primary source's lead image, when it has a free one. */
+  cover: Exhibit | null;
 }
 
 export interface OpenClueView {
@@ -21,6 +25,10 @@ export interface OpenClueView {
   body: string;
   quote: string;
   source: { title: string; url: string };
+  /** For an artifact clue: the exhibit whose title shares words with it, shown as its photo. */
+  exhibitIndex: number | null;
+  /** A sealed clue shown for free because it explains a wrong accusation. */
+  revealedByMistake: boolean;
 }
 
 export interface SealedClueView {
@@ -48,8 +56,19 @@ export interface ResultView {
   learned: string[];
 }
 
+/** Comic-panel captions. The closing may state the answer, so it arrives only once the play ends. */
+export interface NarrationView {
+  setting: string;
+  mystery: string;
+  task: string;
+  closing: string | null;
+}
+
 export interface PlayView {
   case: CaseSummary;
+  narration: NarrationView;
+  /** Real archive images from the sources (Wikimedia Commons), with credits and licenses. */
+  exhibits: Exhibit[];
   status: GameStatus;
   score: number;
   livesLeft: number;
@@ -61,7 +80,7 @@ export interface PlayView {
 
 export function summarize(record: CaseRecord): CaseSummary {
   const { slug, number, kind, dateKey, content } = record;
-  return { slug, number, kind, dateKey, title: content.title, category: content.category, era: content.era };
+  return { slug, number, kind, dateKey, title: content.title, category: content.category, era: content.era, cover: record.exhibits[0] ?? null };
 }
 
 /**
@@ -85,6 +104,8 @@ export function buildPlayView(record: CaseRecord, state: GameState): PlayView {
       body: clue.body,
       quote: clue.quote,
       source: { title: source?.title ?? "", url: source?.url ?? "" },
+      exhibitIndex: clue.kind === "artifact" ? fittingExhibit(`${clue.headline} ${clue.body}`, record.exhibits) : null,
+      revealedByMistake: state.revealedClueIds.includes(clue.id),
     };
   });
 
@@ -95,8 +116,12 @@ export function buildPlayView(record: CaseRecord, state: GameState): PlayView {
     return { id: h.id, text: h.text, status: "open", refutedByClueId: null };
   });
 
+  const narration = record.narration ?? fallbackNarration(record.content);
+
   return {
     case: summarize(record),
+    narration: { setting: narration.setting, mystery: narration.mystery, task: narration.task, closing: ended ? narration.closing : null },
+    exhibits: record.exhibits,
     status: state.status,
     score: scoreOf(state),
     livesLeft: state.livesLeft,
@@ -112,4 +137,15 @@ export function buildPlayView(record: CaseRecord, state: GameState): PlayView {
         }
       : null,
   };
+}
+
+/** Index of the exhibit sharing the most significant words with the text, or null if none shares any. */
+export function fittingExhibit(text: string, exhibits: Exhibit[]): number | null {
+  const words = significantWords(text);
+  let best: { index: number; shared: number } | null = null;
+  exhibits.forEach((exhibit, index) => {
+    const shared = [...significantWords(exhibit.title)].filter((w) => words.has(w)).length;
+    if (shared > 0 && (!best || shared > best.shared)) best = { index, shared };
+  });
+  return best === null ? null : (best as { index: number }).index;
 }

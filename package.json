@@ -16,7 +16,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "cases:seed": "tsx --conditions=react-server --env-file-if-exists=.env.local scripts/cases.ts seed",
-    "cases:generate": "tsx --conditions=react-server --env-file-if-exists=.env.local scripts/cases.ts generate"
+    "cases:generate": "tsx --conditions=react-server --env-file-if-exists=.env.local scripts/cases.ts generate",
+    "cases:backfill": "tsx --conditions=react-server --env-file-if-exists=.env.local scripts/cases.ts backfill"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",

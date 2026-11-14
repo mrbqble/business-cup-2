@@ -15,6 +15,13 @@
       "when": 1794686829473,
       "tag": "0001_players",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794689200209,
+      "tag": "0002_exhibits_narration",
+      "breakpoints": true
     }
   ]
 }

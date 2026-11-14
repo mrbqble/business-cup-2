@@ -4,7 +4,7 @@ import { Card } from "@/components/ui";
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-6">
+    <main className="mx-auto flex w-full max-w-2xl flex-col gap-6">
       <section>
         <h1 className="font-display text-3xl font-semibold tracking-tight">Solve today&apos;s real mystery</h1>
         <p className="mt-2 text-muted">

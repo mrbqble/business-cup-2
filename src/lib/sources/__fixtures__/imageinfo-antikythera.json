@@ -1,0 +1,1180 @@
+{
+  "batchcomplete": true,
+  "query": {
+    "pages": [
+      {
+        "ns": 6,
+        "title": "File:Solar system.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 4225968,
+            "width": 4500,
+            "height": 5600,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Solar_system.jpg/960px-Solar_system.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 996,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Solar_system.jpg/1920px-Solar_system.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Solar_system.jpg/960px-Solar_system.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 996,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Solar_system.jpg/1920px-Solar_system.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/Solar_system.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Solar_system.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=357729",
+            "extmetadata": {
+              "Artist": {
+                "value": "NASA/JPL",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Parthenon from west.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 822254,
+            "width": 2048,
+            "height": 1536,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Parthenon_from_west.jpg/960px-Parthenon_from_west.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 600,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Parthenon_from_west.jpg/1920px-Parthenon_from_west.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Parthenon_from_west.jpg/960px-Parthenon_from_west.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 600,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Parthenon_from_west.jpg/1920px-Parthenon_from_west.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Parthenon_from_west.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Parthenon_from_west.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=1427237",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Mountain\" title=\"User:Mountain\">User:Mountain</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Newton's reflecting telescope.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 361352,
+            "width": 1140,
+            "height": 1276,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Newton%27s_reflecting_telescope.jpg/960px-Newton%27s_reflecting_telescope.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 895,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Newton%27s_reflecting_telescope.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Newton%27s_reflecting_telescope.jpg/960px-Newton%27s_reflecting_telescope.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 895,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/a/aa/Newton%27s_reflecting_telescope.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Newton%27s_reflecting_telescope.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Newton%27s_reflecting_telescope.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=33048117",
+            "extmetadata": {
+              "Artist": {
+                "value": "David Brewster",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:National Archaeological Museum Athens 09.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 335460,
+            "width": 1024,
+            "height": 683,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/National_Archaeological_Museum_Athens_09.jpg/960px-National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 534,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/8/83/National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/8/83/National_Archaeological_Museum_Athens_09.jpg/960px-National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 534,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/8/83/National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:National_Archaeological_Museum_Athens_09.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=8007254",
+            "extmetadata": {
+              "Artist": {
+                "value": "Lucretius",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "GFDL",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "http://www.gnu.org/copyleft/fdl.html",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Nat arc mus ath 09.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 335460,
+            "width": 1024,
+            "height": 683,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/National_Archaeological_Museum_Athens_09.jpg/960px-National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 534,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/8/83/National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/8/83/National_Archaeological_Museum_Athens_09.jpg/960px-National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 534,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/8/83/National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/National_Archaeological_Museum_Athens_09.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:National_Archaeological_Museum_Athens_09.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=8007254",
+            "extmetadata": {
+              "Artist": {
+                "value": "Lucretius",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "GFDL",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "http://www.gnu.org/copyleft/fdl.html",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Mechanism of Antikythera - Kotsanas version - front side.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 213172,
+            "width": 1200,
+            "height": 1600,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Mechanism_of_Antikythera_-_Kotsanas_version_-_front_side.jpg/960px-Mechanism_of_Antikythera_-_Kotsanas_version_-_front_side.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 1067,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/d/da/Mechanism_of_Antikythera_-_Kotsanas_version_-_front_side.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Mechanism_of_Antikythera_-_Kotsanas_version_-_front_side.jpg/960px-Mechanism_of_Antikythera_-_Kotsanas_version_-_front_side.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 1067,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/d/da/Mechanism_of_Antikythera_-_Kotsanas_version_-_front_side.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Mechanism_of_Antikythera_-_Kotsanas_version_-_front_side.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Mechanism_of_Antikythera_-_Kotsanas_version_-_front_side.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=159163335",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Denexeitelos&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Denexeitelos (page does not exist)\">Denexeitelos</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Manual2021-X MOUSSAS SAROS.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 2592115,
+            "width": 2059,
+            "height": 1673,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Manual2021-X_MOUSSAS_SAROS.jpg/960px-Manual2021-X_MOUSSAS_SAROS.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 650,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Manual2021-X_MOUSSAS_SAROS.jpg/1920px-Manual2021-X_MOUSSAS_SAROS.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Manual2021-X_MOUSSAS_SAROS.jpg/960px-Manual2021-X_MOUSSAS_SAROS.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 650,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Manual2021-X_MOUSSAS_SAROS.jpg/1920px-Manual2021-X_MOUSSAS_SAROS.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Manual2021-X_MOUSSAS_SAROS.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Manual2021-X_MOUSSAS_SAROS.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=102509081",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Xmoussas&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Xmoussas (page does not exist)\">Xmoussas</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:He1523a.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 43584,
+            "width": 180,
+            "height": 207,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/5/5f/He1523a.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 800,
+            "thumbheight": 920,
+            "thumbattribs": {
+              "src": "//upload.wikimedia.org/wikipedia/commons/5/5f/He1523a.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 920
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/He1523a.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:He1523a.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=4462063",
+            "extmetadata": {
+              "Artist": {
+                "value": "ESO, European Southern Observatory",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Earth-moon.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 995863,
+            "width": 3000,
+            "height": 2400,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Earth-moon.jpg/960px-Earth-moon.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 640,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Earth-moon.jpg/1920px-Earth-moon.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Earth-moon.jpg/960px-Earth-moon.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 640,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Earth-moon.jpg/1920px-Earth-moon.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Earth-moon.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Earth-moon.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=1221",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/Apollo_8\" title=\"Apollo 8\">Apollo 8</a> crewmember <a href=\"https://en.wikipedia.org/wiki/William_Anders\" class=\"extiw\" title=\"w:William Anders\">Bill Anders</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:DerekdeSollaPrice.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 189982,
+            "width": 354,
+            "height": 506,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/6/61/DerekdeSollaPrice.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 800,
+            "thumbheight": 1144,
+            "thumbattribs": {
+              "src": "//upload.wikimedia.org/wikipedia/commons/6/61/DerekdeSollaPrice.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 1144
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/DerekdeSollaPrice.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:DerekdeSollaPrice.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=2468893",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"https://en.wikipedia.org/wiki/User:Artistsmarket\" class=\"extiw\" title=\"wikipedia:User:Artistsmarket\">Artistsmarket</a> at <a href=\"https://en.wikipedia.org/wiki/\" class=\"extiw\" title=\"wikipedia:\">English Wikipedia</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Clock Tower from Su Song's Book desmear.JPG",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 676373,
+            "width": 908,
+            "height": 1366,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/4/46/Clock_Tower_from_Su_Song%27s_Book_desmear.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 800,
+            "thumbheight": 1204,
+            "thumbattribs": {
+              "src": "//upload.wikimedia.org/wikipedia/commons/4/46/Clock_Tower_from_Su_Song%27s_Book_desmear.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 1204
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/4/46/Clock_Tower_from_Su_Song%27s_Book_desmear.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Clock_Tower_from_Su_Song%27s_Book_desmear.JPG",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=41581041",
+            "extmetadata": {
+              "Artist": {
+                "value": "Su Song",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:CAMK Mechanizm z Antykithiry LEGO.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 6180447,
+            "width": 3072,
+            "height": 2304,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/CAMK_Mechanizm_z_Antykithiry_LEGO.jpg/960px-CAMK_Mechanizm_z_Antykithiry_LEGO.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 600,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/CAMK_Mechanizm_z_Antykithiry_LEGO.jpg/1920px-CAMK_Mechanizm_z_Antykithiry_LEGO.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/9/94/CAMK_Mechanizm_z_Antykithiry_LEGO.jpg/960px-CAMK_Mechanizm_z_Antykithiry_LEGO.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 600,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/9/94/CAMK_Mechanizm_z_Antykithiry_LEGO.jpg/1920px-CAMK_Mechanizm_z_Antykithiry_LEGO.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/CAMK_Mechanizm_z_Antykithiry_LEGO.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:CAMK_Mechanizm_z_Antykithiry_LEGO.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=16585858",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Marek_Mazurkiewicz\" title=\"User:Marek Mazurkiewicz\">Marek Mazurkiewicz</a> (<a href=\"//commons.wikimedia.org/wiki/User_talk:Marek_Mazurkiewicz\" title=\"User talk:Marek Mazurkiewicz\"><span class=\"signature-talk\">talk</span></a>) 22:00, 19 September 2011 (UTC)",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/3.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Antikythera model front panel Mogi Vicentini 2007.JPG",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 1976963,
+            "width": 1944,
+            "height": 2592,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG/960px-Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 1067,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG/1920px-Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG/960px-Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 1067,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG/1920px-Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Antikythera_model_front_panel_Mogi_Vicentini_2007.JPG",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=2523740",
+            "extmetadata": {
+              "Artist": {
+                "value": "Mogi Vicentini",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 2.5",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/2.5",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Antikythera Fragment G (Front).webp",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 15087158,
+            "width": 3718,
+            "height": 3238,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Antikythera_Fragment_G_%28Front%29.webp/960px-Antikythera_Fragment_G_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 697,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Antikythera_Fragment_G_%28Front%29.webp/1920px-Antikythera_Fragment_G_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Antikythera_Fragment_G_%28Front%29.webp/960px-Antikythera_Fragment_G_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 697,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Antikythera_Fragment_G_%28Front%29.webp/1920px-Antikythera_Fragment_G_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Antikythera_Fragment_G_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Antikythera_Fragment_G_(Front).webp",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=182546868",
+            "extmetadata": {
+              "Artist": {
+                "value": "Logg Tandy",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/webp"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Antikythera Fragment F (Front).webp",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 11500600,
+            "width": 3366,
+            "height": 2899,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Antikythera_Fragment_F_%28Front%29.webp/960px-Antikythera_Fragment_F_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 689,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Antikythera_Fragment_F_%28Front%29.webp/1920px-Antikythera_Fragment_F_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Antikythera_Fragment_F_%28Front%29.webp/960px-Antikythera_Fragment_F_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 689,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Antikythera_Fragment_F_%28Front%29.webp/1920px-Antikythera_Fragment_F_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Antikythera_Fragment_F_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Antikythera_Fragment_F_(Front).webp",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=182546874",
+            "extmetadata": {
+              "Artist": {
+                "value": "Logg Tandy",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/webp"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Antikythera Fragment E (Front).webp",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 5053792,
+            "width": 2293,
+            "height": 1917,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Antikythera_Fragment_E_%28Front%29.webp/960px-Antikythera_Fragment_E_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 669,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Antikythera_Fragment_E_%28Front%29.webp/1920px-Antikythera_Fragment_E_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Antikythera_Fragment_E_%28Front%29.webp/960px-Antikythera_Fragment_E_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 669,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Antikythera_Fragment_E_%28Front%29.webp/1920px-Antikythera_Fragment_E_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Antikythera_Fragment_E_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Antikythera_Fragment_E_(Front).webp",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=182546866",
+            "extmetadata": {
+              "Artist": {
+                "value": "Logg Tandy",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/webp"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Antikythera Fragment D (Front).webp",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 5960066,
+            "width": 2028,
+            "height": 2439,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Antikythera_Fragment_D_%28Front%29.webp/960px-Antikythera_Fragment_D_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 962,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Antikythera_Fragment_D_%28Front%29.webp/1920px-Antikythera_Fragment_D_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Antikythera_Fragment_D_%28Front%29.webp/960px-Antikythera_Fragment_D_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 962,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Antikythera_Fragment_D_%28Front%29.webp/1920px-Antikythera_Fragment_D_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Antikythera_Fragment_D_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Antikythera_Fragment_D_(Front).webp",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=182546867",
+            "extmetadata": {
+              "Artist": {
+                "value": "Logg Tandy",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/webp"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Antikythera Fragment C (Front).webp",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 13937828,
+            "width": 3336,
+            "height": 3336,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Antikythera_Fragment_C_%28Front%29.webp/960px-Antikythera_Fragment_C_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 800,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Antikythera_Fragment_C_%28Front%29.webp/1920px-Antikythera_Fragment_C_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Antikythera_Fragment_C_%28Front%29.webp/960px-Antikythera_Fragment_C_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 800,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Antikythera_Fragment_C_%28Front%29.webp/1920px-Antikythera_Fragment_C_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Antikythera_Fragment_C_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Antikythera_Fragment_C_(Front).webp",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=182540607",
+            "extmetadata": {
+              "Artist": {
+                "value": "Logg Tandy",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/webp"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Antikythera Fragment B (Front).webp",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 16336190,
+            "width": 4000,
+            "height": 4000,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Antikythera_Fragment_B_%28Front%29.webp/960px-Antikythera_Fragment_B_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 800,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Antikythera_Fragment_B_%28Front%29.webp/1920px-Antikythera_Fragment_B_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Antikythera_Fragment_B_%28Front%29.webp/960px-Antikythera_Fragment_B_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 800,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Antikythera_Fragment_B_%28Front%29.webp/1920px-Antikythera_Fragment_B_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Antikythera_Fragment_B_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Antikythera_Fragment_B_(Front).webp",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=182540606",
+            "extmetadata": {
+              "Artist": {
+                "value": "Logg Tandy",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/webp"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Antikythera Fragment A (Back).webp",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 17577650,
+            "width": 3405,
+            "height": 3554,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Antikythera_Fragment_A_%28Back%29.webp/960px-Antikythera_Fragment_A_%28Back%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 835,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Antikythera_Fragment_A_%28Back%29.webp/1920px-Antikythera_Fragment_A_%28Back%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Antikythera_Fragment_A_%28Back%29.webp/960px-Antikythera_Fragment_A_%28Back%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 835,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Antikythera_Fragment_A_%28Back%29.webp/1920px-Antikythera_Fragment_A_%28Back%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Antikythera_Fragment_A_%28Back%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Antikythera_Fragment_A_(Back).webp",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=164648451",
+            "extmetadata": {
+              "Artist": {
+                "value": "Logg Tandy",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/webp"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:AntikytheraMechanismSchematic-Freeth12.png",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 57890,
+            "width": 977,
+            "height": 710,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/AntikytheraMechanismSchematic-Freeth12.png/960px-AntikytheraMechanismSchematic-Freeth12.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 581,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/5/59/AntikytheraMechanismSchematic-Freeth12.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/5/59/AntikytheraMechanismSchematic-Freeth12.png/960px-AntikytheraMechanismSchematic-Freeth12.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 581,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/5/59/AntikytheraMechanismSchematic-Freeth12.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/5/59/AntikytheraMechanismSchematic-Freeth12.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:AntikytheraMechanismSchematic-Freeth12.png",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=33538164",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:SkoreKeep&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:SkoreKeep (page does not exist)\">SkoreKeep</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/3.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/png"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:2012-08-17 Hodometer anagoria.JPG",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 8924028,
+            "width": 4752,
+            "height": 3168,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/2012-08-17_Hodometer_anagoria.JPG/960px-2012-08-17_Hodometer_anagoria.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 533,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/2012-08-17_Hodometer_anagoria.JPG/1920px-2012-08-17_Hodometer_anagoria.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/8/89/2012-08-17_Hodometer_anagoria.JPG/960px-2012-08-17_Hodometer_anagoria.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 533,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/8/89/2012-08-17_Hodometer_anagoria.JPG/1920px-2012-08-17_Hodometer_anagoria.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/2012-08-17_Hodometer_anagoria.JPG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:2012-08-17_Hodometer_anagoria.JPG",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=23123118",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Anagoria\" title=\"User:Anagoria\">Anagoria</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/3.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Antikythera Fragment A (Front).webp",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 17609486,
+            "width": 3648,
+            "height": 3648,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Antikythera_Fragment_A_%28Front%29.webp/960px-Antikythera_Fragment_A_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 800,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Antikythera_Fragment_A_%28Front%29.webp/1920px-Antikythera_Fragment_A_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Antikythera_Fragment_A_%28Front%29.webp/960px-Antikythera_Fragment_A_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 800,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/Antikythera_Fragment_A_%28Front%29.webp/1920px-Antikythera_Fragment_A_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Antikythera_Fragment_A_%28Front%29.webp?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Antikythera_Fragment_A_(Front).webp",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=164647291",
+            "extmetadata": {
+              "Artist": {
+                "value": "Logg Tandy",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/webp"
+          }
+        ]
+      },
+      {
+        "pageid": 18601291,
+        "ns": 6,
+        "title": "File:Crab Nebula.jpg",
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 14508851,
+            "width": 3864,
+            "height": 3864,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/960px-Crab_Nebula.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 800,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/1920px-Crab_Nebula.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/960px-Crab_Nebula.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 800,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/1920px-Crab_Nebula.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Crab_Nebula.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Crab_Nebula.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=516106",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/NASA\" title=\"NASA\">NASA</a>, <a href=\"//commons.wikimedia.org/wiki/ESA\" class=\"mw-redirect\" title=\"ESA\">ESA</a>, J. Hester and A. Loll (Arizona State University)",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "pageid": 36445602,
+        "ns": 6,
+        "title": "File:Computer graphic for front of Antikythera mechanism.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "size": 24128,
+            "width": 315,
+            "height": 317,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/en/b/b8/Computer_graphic_for_front_of_Antikythera_mechanism.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 800,
+            "thumbheight": 805,
+            "thumbattribs": {
+              "src": "//upload.wikimedia.org/wikipedia/en/b/b8/Computer_graphic_for_front_of_Antikythera_mechanism.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 805
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/en/b/b8/Computer_graphic_for_front_of_Antikythera_mechanism.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://en.wikipedia.org/wiki/File:Computer_graphic_for_front_of_Antikythera_mechanism.jpg",
+            "descriptionshorturl": "https://en.wikipedia.org/w/index.php?curid=36445602",
+            "extmetadata": {
+              "Artist": {
+                "value": "Tony Freeth",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Fair use",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "NonFree": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "pageid": 36445604,
+        "ns": 6,
+        "title": "File:Computer graphic for back of Antikythera mechanism.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "size": 30821,
+            "width": 228,
+            "height": 435,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/en/4/4b/Computer_graphic_for_back_of_Antikythera_mechanism.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 800,
+            "thumbheight": 1526,
+            "thumbattribs": {
+              "src": "//upload.wikimedia.org/wikipedia/en/4/4b/Computer_graphic_for_back_of_Antikythera_mechanism.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 1526
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/en/4/4b/Computer_graphic_for_back_of_Antikythera_mechanism.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://en.wikipedia.org/wiki/File:Computer_graphic_for_back_of_Antikythera_mechanism.jpg",
+            "descriptionshorturl": "https://en.wikipedia.org/w/index.php?curid=36445604",
+            "extmetadata": {
+              "Artist": {
+                "value": "Tony Freeth",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Fair use",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "NonFree": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      }
+    ]
+  }
+}

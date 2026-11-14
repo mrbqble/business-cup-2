@@ -1,9 +1,11 @@
 import { sql } from "drizzle-orm";
 import { index, integer, jsonb, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 
+import type { Narration } from "../case/narration";
 import type { CaseContent, CaseSource, GenerationInfo } from "../case/schema";
 import type { VerificationReport } from "../case/verify";
 import type { GameAction } from "../game/engine";
+import type { Exhibit } from "../sources/exhibits";
 
 /** An anonymous player: one per device, identified by a secret token whose hash is stored here. */
 export const players = pgTable("players", {
@@ -32,6 +34,10 @@ export const cases = pgTable(
     sources: jsonb("sources").$type<CaseSource[]>().notNull(),
     verification: jsonb("verification").$type<VerificationReport>().notNull(),
     generation: jsonb("generation").$type<GenerationInfo>().notNull(),
+    /** Free-licensed Wikimedia Commons images from the sources; the first is the cover. */
+    exhibits: jsonb("exhibits").$type<Exhibit[]>().notNull().default([]),
+    /** Comic-panel captions; null until written (the view then uses the case's own words). */
+    narration: jsonb("narration").$type<Narration>(),
     /** The player who asked for a topic case; counts toward their free topic cases. */
     createdBy: uuid("created_by").references(() => players.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),

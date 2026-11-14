@@ -8,13 +8,14 @@ import { ApiError, generateCase, type GenerateEvent } from "@/lib/client/api";
 
 import { Button, Card, ErrorState } from "./ui";
 
-type Stage = "checking_topic" | "finding_sources" | "drafting_clues" | "checking_citations" | "repairing";
+type Stage = "checking_topic" | "finding_sources" | "drafting_clues" | "checking_citations" | "repairing" | "assembling_file";
 
 const STEPS: { stage: Stage; label: string }[] = [
   { stage: "checking_topic", label: "Checking the topic" },
   { stage: "finding_sources", label: "Finding sources on Wikipedia" },
   { stage: "drafting_clues", label: "Drafting clues" },
   { stage: "checking_citations", label: "Checking every quote against the sources" },
+  { stage: "assembling_file", label: "Pulling archive images and writing the briefing" },
 ];
 
 type Outcome = { kind: "running" } | { kind: "refused"; message: string } | { kind: "failed"; message: string; retryable: boolean };

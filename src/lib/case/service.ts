@@ -1,10 +1,13 @@
 import "server-only";
 
-import { getGenerationAi } from "@/lib/ai";
+import { estimateCostUsd, getGenerationAi, getNarrationAi } from "@/lib/ai";
 import { insertCase } from "@/lib/db/cases";
+import { getExhibits, type Exhibit } from "@/lib/sources/exhibits";
 import { getWikipedia } from "@/lib/sources/wikipedia";
 
 import { generateCase, type GeneratedCase, type GenerationEvent } from "./generate";
+import { writeNarration } from "./narrate";
+import { publicCaseText, type Narration } from "./narration";
 import type { CaseKind, CaseRecord } from "./schema";
 import { normalizeTopic, slugify } from "./topic";
 
@@ -19,18 +22,44 @@ export interface CreateCaseInput {
   onEvent?: (event: GenerationEvent) => void;
 }
 
-/** Generates a verified case from live sources. Nothing is stored. */
-export function draftCase(input: Omit<CreateCaseInput, "kind" | "dateKey">): Promise<GeneratedCase> {
-  return generateCase(input.topic, {
+/** A verified case plus its presentation layer: archive images and comic-panel narration. */
+export interface DraftedCase extends GeneratedCase {
+  exhibits: Exhibit[];
+  narration: Narration;
+}
+
+/** Generates a verified case from live sources, then its exhibits and narration. Nothing is stored. */
+export async function draftCase(input: Omit<CreateCaseInput, "kind" | "dateKey">): Promise<DraftedCase> {
+  const generated = await generateCase(input.topic, {
     ai: getGenerationAi(),
     wikipedia: getWikipedia(),
     angle: input.angle,
     onEvent: input.onEvent,
   });
+
+  input.onEvent?.({ stage: "assembling_file", message: "Pulling archive images and writing the briefing" });
+  const [exhibits, narrated] = await Promise.all([
+    getExhibits().find(generated.sources, publicCaseText(generated.content)),
+    writeNarration(getNarrationAi(), generated.content),
+  ]);
+
+  const { generation } = generated;
+  const narrationCost = estimateCostUsd(narrated.calls.map((c) => c.usage));
+  return {
+    ...generated,
+    exhibits,
+    narration: narrated.narration,
+    generation: {
+      ...generation,
+      providers: [...new Set([...generation.providers, ...narrated.calls.map((c) => c.provider)])],
+      models: [...new Set([...generation.models, ...narrated.calls.flatMap((c) => (c.usage ? [c.usage.model] : []))])],
+      costUsd: generation.costUsd === null || narrationCost === null ? null : generation.costUsd + narrationCost,
+    },
+  };
 }
 
-export async function storeCase(generated: GeneratedCase, input: CreateCaseInput): Promise<CaseRecord> {
-  const { content, sources, verification, generation } = generated;
+export async function storeCase(drafted: DraftedCase, input: CreateCaseInput): Promise<CaseRecord> {
+  const { content, sources, verification, generation, exhibits, narration } = drafted;
   return insertCase({
     slug: slugify(content.title),
     kind: input.kind,
@@ -43,6 +72,8 @@ export async function storeCase(generated: GeneratedCase, input: CreateCaseInput
     sources: sources.map(({ id, title, url, revisionId }) => ({ id, title, url, revisionId })),
     verification,
     generation,
+    exhibits,
+    narration,
     createdBy: input.createdBy ?? null,
   });
 }

@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+import type { Exhibit } from "../sources/exhibits";
+
+import type { Narration } from "./narration";
+
 export const CLUE_COUNT = 8;
 export const OPENING_CLUE_COUNT = 2;
 export const HYPOTHESIS_COUNT = 4;
@@ -85,6 +89,8 @@ export interface CaseRecord {
   dateKey: string | null;
   content: CaseContent;
   sources: CaseSource[];
+  exhibits: Exhibit[];
+  narration: Narration | null;
 }
 
 export function openingClues(content: CaseContent): Clue[] {

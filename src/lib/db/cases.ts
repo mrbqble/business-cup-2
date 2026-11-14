@@ -1,8 +1,10 @@
 import "server-only";
 
-import { and, desc, eq, lte, sql } from "drizzle-orm";
+import { and, asc, desc, eq, lte, sql } from "drizzle-orm";
 
+import type { Narration } from "@/lib/case/narration";
 import type { CaseRecord } from "@/lib/case/schema";
+import type { Exhibit } from "@/lib/sources/exhibits";
 
 import { getDb } from "./client";
 import { cases, type CaseRow, type NewCaseRow } from "./schema";
@@ -16,6 +18,8 @@ export function toCaseRecord(row: CaseRow): CaseRecord {
     dateKey: row.dateKey,
     content: row.payload,
     sources: row.sources,
+    exhibits: row.exhibits,
+    narration: row.narration,
   };
 }
 
@@ -77,4 +81,16 @@ export async function insertCase(values: Omit<NewCaseRow, "id" | "number" | "cre
     .values({ ...values, number })
     .returning();
   return toCaseRecord(row);
+}
+
+/** Every stored case, oldest first; for backfills. */
+export async function listCases(): Promise<CaseRecord[]> {
+  const rows = await getDb().select().from(cases).orderBy(asc(cases.createdAt));
+  return rows.map(toCaseRecord);
+}
+
+/** Sets a case's exhibits and/or narration; the verified content itself never changes. */
+export async function updateCasePresentation(id: string, values: { exhibits?: Exhibit[]; narration?: Narration }): Promise<void> {
+  if (values.exhibits === undefined && values.narration === undefined) return;
+  await getDb().update(cases).set(values).where(eq(cases.id, id));
 }

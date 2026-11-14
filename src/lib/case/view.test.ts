@@ -2,9 +2,26 @@ import { describe, expect, it } from "vitest";
 
 import { replay, rulesFor, type GameAction } from "@/lib/game/engine";
 
+import type { Exhibit } from "@/lib/sources/exhibits";
+
 import { sampleCase, sampleSource } from "./__fixtures__/sample-case";
+import { fallbackNarration } from "./narration";
 import type { CaseRecord } from "./schema";
-import { buildPlayView } from "./view";
+import { buildPlayView, fittingExhibit } from "./view";
+
+const exhibit: Exhibit = {
+  imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/x/800px-Snow-cholera-map.jpg",
+  width: 800,
+  height: 760,
+  pageUrl: "https://commons.wikimedia.org/wiki/File:Snow-cholera-map.jpg",
+  title: "Snow cholera map",
+  credit: "John Snow",
+  license: "Public domain",
+  licenseUrl: null,
+  sourceTitle: sampleSource.title,
+  sourceUrl: sampleSource.url,
+};
+const CLOSING = "The leaking cesspit beside the Broad Street well was the culprit all along.";
 
 const record: CaseRecord = {
   id: "00000000-0000-0000-0000-000000000001",
@@ -14,12 +31,18 @@ const record: CaseRecord = {
   dateKey: "2026-11-15",
   content: sampleCase(),
   sources: [{ id: sampleSource.id, title: sampleSource.title, url: sampleSource.url, revisionId: sampleSource.revisionId }],
+  exhibits: [exhibit],
+  narration: { setting: "London, 1854.", mystery: "Cholera grips Soho.", task: "Find the source, Detective.", closing: CLOSING },
 };
 
 function viewAfter(...actions: GameAction[]) {
-  const result = replay(rulesFor(record.content), actions);
+  return viewOf(record, ...actions);
+}
+
+function viewOf(caseRecord: CaseRecord, ...actions: GameAction[]) {
+  const result = replay(rulesFor(caseRecord.content), actions);
   if (!result.ok) throw new Error(result.error);
-  return buildPlayView(record, result.state);
+  return buildPlayView(caseRecord, result.state);
 }
 
 describe("buildPlayView", () => {
@@ -51,13 +74,35 @@ describe("buildPlayView", () => {
       expect(json).not.toContain(clue.headline);
     }
     expect(view.hypotheses.some((h) => h.status === "correct")).toBe(false);
+    expect(view.narration.closing).toBeNull();
+    expect(json).not.toContain(CLOSING);
+  });
+
+  it("shows the intro narration and the exhibits with credits from the start, and the closing only at the end", () => {
+    const start = viewAfter();
+    expect(start.narration).toEqual({ setting: "London, 1854.", mystery: "Cholera grips Soho.", task: "Find the source, Detective.", closing: null });
+    expect(start.exhibits).toEqual([exhibit]);
+    expect(start.case.cover).toEqual(exhibit);
+
+    const solved = viewAfter({ type: "accuse", hypothesisId: "h1" });
+    expect(solved.narration.closing).toBe(CLOSING);
+  });
+
+  it("falls back to the case's own words for a case without narration or exhibits", () => {
+    const bare: CaseRecord = { ...record, exhibits: [], narration: null };
+    const start = viewOf(bare);
+    expect(start.narration.mystery).toBe(bare.content.title);
+    expect(start.narration.closing).toBeNull();
+    expect(start.case.cover).toBeNull();
+    expect(viewOf(bare, { type: "accuse", hypothesisId: "h1" }).narration.closing).toBe(fallbackNarration(bare.content).closing);
   });
 
   it("marks a wrong accusation as ruled out and points at the clue that refutes it", () => {
     const view = viewAfter({ type: "accuse", hypothesisId: "h3" });
 
     expect(view.hypotheses.find((h) => h.id === "h3")).toEqual(expect.objectContaining({ status: "ruled_out", refutedByClueId: "c5" }));
-    expect(view.clues.find((c) => c.id === "c5")?.sealed).toBe(false);
+    expect(view.clues.find((c) => c.id === "c5")).toMatchObject({ sealed: false, revealedByMistake: true });
+    expect(view.clues[0]).toMatchObject({ sealed: false, revealedByMistake: false });
     expect(view.livesLeft).toBe(2);
   });
 
@@ -74,5 +119,15 @@ describe("buildPlayView", () => {
       sources: [{ title: sampleSource.title, url: sampleSource.url, revisionId: sampleSource.revisionId }],
       learned: record.content.learned,
     });
+  });
+});
+
+describe("fittingExhibit", () => {
+  it("picks the exhibit sharing the most words with an artifact clue, or none", () => {
+    const titled = (title: string): Exhibit => ({ ...exhibit, title });
+    const exhibits = [titled("Broad Street map"), titled("John Snow pump handle replica"), titled("Soho skyline")];
+    expect(fittingExhibit("The pump handle was removed", exhibits)).toBe(1);
+    expect(fittingExhibit("A ledger of brewery wages", exhibits)).toBeNull();
+    expect(fittingExhibit("anything", [])).toBeNull();
   });
 });

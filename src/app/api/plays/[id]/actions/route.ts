@@ -30,5 +30,5 @@ export async function POST(request: Request, { params }: RouteContext<"/api/play
     const [status, message] = MESSAGES[result.error];
     return jsonError(status, result.error, message);
   }
-  return json({ playId: result.playId, view: result.view });
+  return json({ playId: result.playId, view: result.view, ...(result.promotion !== undefined ? { promotion: result.promotion } : {}) });
 }

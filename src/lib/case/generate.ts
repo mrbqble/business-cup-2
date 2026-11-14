@@ -26,7 +26,7 @@ const SEARCH_RESULTS = 4;
 const OFF_TOPIC_TITLE =
   /\((software|company|brand|app|website|band|album|song|single|film|movie|tv series|television series|video game|game|board game|novel|book|comics|manga|anime|character|musical|play|magazine|newspaper|podcast|public house|pub|restaurant|hotel)\)$/i;
 
-export type GenerationStage = "finding_sources" | "drafting_clues" | "checking_citations" | "repairing";
+export type GenerationStage = "finding_sources" | "drafting_clues" | "checking_citations" | "repairing" | "assembling_file";
 
 export interface GenerationEvent {
   stage: GenerationStage;

@@ -4,9 +4,10 @@ import { z } from "zod";
 
 import { buildPlayView, summarize, type CaseSummary, type PlayView } from "@/lib/case/view";
 import { findCaseById, findCaseBySlug } from "@/lib/db/cases";
-import { appendAction, findPlay, startPlayerPlay } from "@/lib/db/plays";
+import { appendAction, findPlay, playerRecord, startPlayerPlay } from "@/lib/db/plays";
 import { findPlayerById } from "@/lib/db/players";
 import { applyAction, replay, rulesFor, scoreOf, type ActionError, type GameAction } from "@/lib/game/engine";
+import { promotionFor, type Rank } from "@/lib/game/rank";
 import { shareGrid } from "@/lib/game/share";
 
 export const gameActionSchema = z.discriminatedUnion("type", [
@@ -14,7 +15,9 @@ export const gameActionSchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("accuse"), hypothesisId: z.string().min(1) }),
 ]);
 
-export type PlayResult = { ok: true; playId: string; view: PlayView; created?: boolean } | { ok: false; error: PlayError };
+export type PlayResult =
+  | { ok: true; playId: string; view: PlayView; created?: boolean; promotion?: Rank | null }
+  | { ok: false; error: PlayError };
 export type PlayError = "case_not_found" | "play_not_found" | "conflict" | ActionError;
 
 /** Starts the player's play of a case, or resumes it when they already have one. */
@@ -43,7 +46,11 @@ export async function performAction(playId: string, playerId: string, action: Ga
 
   const saved = await appendAction(playId, loaded.actionCount, action, next.state);
   if (!saved) return { ok: false, error: "conflict" };
-  return { ok: true, playId, view: buildPlayView(loaded.record, next.state) };
+  const view = buildPlayView(loaded.record, next.state);
+  if (next.state.status === "in_progress") return { ok: true, playId, view };
+  // The move that ends a case may earn a new detective rank.
+  const promotion = promotionFor(await playerRecord(playerId), scoreOf(next.state));
+  return { ok: true, playId, view, promotion };
 }
 
 export interface SharedResult {
