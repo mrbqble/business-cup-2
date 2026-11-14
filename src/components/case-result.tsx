@@ -21,6 +21,7 @@ export function CaseResult({
   promotion,
   justEnded,
   challengeSlug = null,
+  demo = false,
 }: {
   view: PlayView;
   playId: string;
@@ -29,6 +30,8 @@ export function CaseResult({
   justEnded: boolean;
   /** Set when the play came from a challenge link: the end screen leads back to the comparison. */
   challengeSlug?: string | null;
+  /** Demo mode: no sharing, challenge links or leaderboard, since nothing was really played. */
+  demo?: boolean;
 }) {
   if (!view.result) return null;
   const solved = view.status === "solved";
@@ -93,9 +96,9 @@ export function CaseResult({
       <RankCard promotion={promotion} />
 
       <Card>
-        <ShareResult view={view} playId={playId} />
-        <ChallengeBox caseSlug={view.case.slug} />
-        {view.case.kind === "daily" && <LeaderboardPreview slug={view.case.slug} />}
+        {!demo && <ShareResult view={view} playId={playId} />}
+        {!demo && <ChallengeBox caseSlug={view.case.slug} />}
+        {!demo && view.case.kind === "daily" && <LeaderboardPreview slug={view.case.slug} />}
 
         <h3 className="mt-5 font-semibold">What really happened</h3>
         <ol className="mt-2 flex list-decimal flex-col gap-2 pl-5 text-sm">
@@ -137,11 +140,13 @@ export function CaseResult({
           ))}
         </ul>
 
-        <div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold">
-          <Link href="/" className="inline-flex min-h-11 items-center rounded-card bg-accent px-4 text-accent-text hover:opacity-90">
-            Open a case on any topic
-          </Link>
-        </div>
+        {!demo && (
+          <div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold">
+            <Link href="/" className="inline-flex min-h-11 items-center rounded-card bg-accent px-4 text-accent-text hover:opacity-90">
+              Open a case on any topic
+            </Link>
+          </div>
+        )}
       </Card>
     </section>
   );

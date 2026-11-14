@@ -1,6 +1,6 @@
 import "server-only";
 
-import { and, asc, desc, eq, lte, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, lte, sql } from "drizzle-orm";
 
 import type { Narration } from "@/lib/case/narration";
 import type { CaseRecord } from "@/lib/case/schema";
@@ -33,11 +33,14 @@ export async function findCaseById(id: string): Promise<CaseRecord | null> {
   return row ? toCaseRecord(row) : null;
 }
 
-export async function findTopicCase(topicKey: string): Promise<CaseRecord | null> {
+/** The cached topic case stored under any of the given keys (see topicLookupKeys). */
+export async function findTopicCase(topicKeys: string[]): Promise<CaseRecord | null> {
+  if (topicKeys.length === 0) return null;
   const [row] = await getDb()
     .select()
     .from(cases)
-    .where(and(eq(cases.kind, "topic"), eq(cases.topicKey, topicKey)))
+    .where(and(eq(cases.kind, "topic"), inArray(cases.topicKey, topicKeys)))
+    .orderBy(asc(cases.createdAt))
     .limit(1);
   return row ? toCaseRecord(row) : null;
 }
@@ -125,4 +128,16 @@ export async function recentTopicCases(limit = 6): Promise<{ slug: string; title
     .where(eq(cases.kind, "topic"))
     .orderBy(desc(cases.createdAt))
     .limit(limit);
+}
+
+/** The fixed sample case for demo mode: the Great Fire of London archive case, else the oldest archive case. */
+export async function findDemoCase(): Promise<CaseRecord | null> {
+  const [preferred] = await getDb()
+    .select()
+    .from(cases)
+    .where(and(eq(cases.kind, "archive"), sql`${cases.slug} like 'what-started-the-great-fire-of-london%'`))
+    .limit(1);
+  if (preferred) return toCaseRecord(preferred);
+  const [oldest] = await getDb().select().from(cases).where(eq(cases.kind, "archive")).orderBy(asc(cases.createdAt)).limit(1);
+  return oldest ? toCaseRecord(oldest) : null;
 }

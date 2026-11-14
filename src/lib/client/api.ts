@@ -1,6 +1,7 @@
 import type { GenerateEvent } from "@/app/api/cases/generate/route";
 import type { CaseSummary, PlayView } from "@/lib/case/view";
 import type { ChallengeView } from "@/lib/challenge/view";
+import type { DemoTour } from "@/lib/demo/tour";
 import type { PlayerStats } from "@/lib/game/stats";
 import type { BillingPeriod, Plan } from "@/lib/player/entitlements";
 import type { Rank } from "@/lib/game/rank";
@@ -101,6 +102,7 @@ export interface ArchiveEntry extends CaseSummary {
 const post = (body?: unknown): RequestInit => ({ method: "POST", body: body === undefined ? undefined : JSON.stringify(body) });
 
 export const api = {
+  demo: () => request<{ tour: DemoTour }>("/api/demo"),
   archive: () => request<{ plan: Plan; cases: ArchiveEntry[] }>("/api/cases/archive"),
   stats: () => request<{ stats: PlayerStats }>("/api/players/me/stats"),
   checkout: (plan: Plan, period: BillingPeriod) => request<{ plan: PlanInfo }>("/api/billing/checkout", post({ plan, period })),
