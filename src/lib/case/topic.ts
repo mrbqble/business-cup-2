@@ -17,11 +17,10 @@ export function slugify(title: string, random: () => number = Math.random): stri
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 60)
-    .replace(/-+$/, "");
+    .replace(/^-+|-+$/g, "");
+  const short = base.length <= 60 ? base : base.slice(0, 61).replace(/-[^-]*$/, "");
   const suffix = Math.floor(random() * 36 ** 4)
     .toString(36)
     .padStart(4, "0");
-  return `${base || "case"}-${suffix}`;
+  return `${short || "case"}-${suffix}`;
 }

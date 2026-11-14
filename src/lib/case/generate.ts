@@ -22,6 +22,9 @@ export const MAX_REPAIR_ROUNDS = 2;
 const SOURCE_CHAR_LIMITS = [32_000, 16_000];
 const MIN_SOURCE_CHARS = 1_500;
 const SEARCH_RESULTS = 4;
+/** Namesake articles about products, media or venues ("Rosetta Stone (software)") are never evidence. */
+const OFF_TOPIC_TITLE =
+  /\((software|company|brand|app|website|band|album|song|single|film|movie|tv series|television series|video game|game|board game|novel|book|comics|manga|anime|character|musical|play|magazine|newspaper|podcast|public house|pub|restaurant|hotel)\)$/i;
 
 export type GenerationStage = "finding_sources" | "drafting_clues" | "checking_citations" | "repairing";
 
@@ -96,12 +99,14 @@ export async function generateCase(topic: string, options: GenerateCaseOptions):
   }
 
   const finalized = finalizeCase(content, random);
-  const verification = verifyCase(finalized, sources);
+  // Only sources that clues actually quote are kept, so the sources list always matches the evidence.
+  const cited = sources.filter((source) => finalized.clues.some((clue) => clue.sourceId === source.id));
+  const verification = verifyCase(finalized, cited);
   if (!verification.ok) throw new GenerationError("unverifiable", "Case failed verification after finalizing");
 
   return {
     content: finalized,
-    sources,
+    sources: cited,
     verification,
     generation: {
       providers: unique(calls.map((c) => c.provider)),
@@ -114,7 +119,7 @@ export async function generateCase(topic: string, options: GenerateCaseOptions):
 }
 
 async function findSources(topic: string, wikipedia: WikipediaClient): Promise<SourceText[]> {
-  const titles = await wikipedia.search(topic, SEARCH_RESULTS);
+  const titles = (await wikipedia.search(topic, SEARCH_RESULTS)).filter((title) => !OFF_TOPIC_TITLE.test(title));
   const articles = await Promise.all(titles.map((title) => wikipedia.article(title).catch(() => null)));
   const usable = articles.filter(
     (a): a is NonNullable<typeof a> => a !== null && a.text.length >= MIN_SOURCE_CHARS && !/may refer to:/i.test(a.text.slice(0, 400)),
