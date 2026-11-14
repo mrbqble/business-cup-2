@@ -6,6 +6,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { ApiError, generateCase, type GenerateEvent } from "@/lib/client/api";
 
+import { PaywallSheet } from "./paywall-sheet";
+
 import { Button, Card, ErrorState } from "./ui";
 
 type Stage = "checking_topic" | "finding_sources" | "drafting_clues" | "checking_citations" | "repairing" | "assembling_file";
@@ -18,7 +20,12 @@ const STEPS: { stage: Stage; label: string }[] = [
   { stage: "assembling_file", label: "Pulling archive images and writing the briefing" },
 ];
 
-type Outcome = { kind: "running" } | { kind: "refused"; message: string } | { kind: "failed"; message: string; retryable: boolean };
+type Outcome =
+  | { kind: "running" }
+  | { kind: "refused"; message: string }
+  | { kind: "paywall"; message: string }
+  | { kind: "capped"; message: string; suggestions: { slug: string; title: string }[] }
+  | { kind: "failed"; message: string; retryable: boolean };
 
 export function GenerateProgress() {
   const router = useRouter();
@@ -27,6 +34,7 @@ export function GenerateProgress() {
   const [detail, setDetail] = useState<string | null>(null);
   const [repairs, setRepairs] = useState<string | null>(null);
   const [outcome, setOutcome] = useState<Outcome>({ kind: "running" });
+  const [sheetOpen, setSheetOpen] = useState(true);
   const started = useRef(false);
 
   const run = useCallback(async () => {
@@ -50,7 +58,12 @@ export function GenerateProgress() {
     try {
       await generateCase(topic, onEvent);
     } catch (error) {
-      if (error instanceof ApiError && (error.status === 422 || error.code === "topic_limit")) {
+      if (error instanceof ApiError && error.code === "topic_limit") {
+        setOutcome({ kind: "paywall", message: error.message });
+      } else if (error instanceof ApiError && error.code === "daily_cap") {
+        const suggestions = Array.isArray(error.details?.suggestions) ? (error.details.suggestions as { slug: string; title: string }[]) : [];
+        setOutcome({ kind: "capped", message: error.message, suggestions });
+      } else if (error instanceof ApiError && error.status === 422) {
         setOutcome({ kind: "refused", message: error.message });
       }
       else if (error instanceof ApiError && error.status === 429) {
@@ -122,6 +135,34 @@ export function GenerateProgress() {
             Try another topic
           </Link>
         </ErrorState>
+      )}
+
+      {outcome.kind === "paywall" && (
+        <>
+          <ErrorState message={outcome.message}>
+            <Link href="/pricing" className="inline-flex min-h-11 items-center text-sm font-semibold underline">
+              See Plus
+            </Link>
+          </ErrorState>
+          <PaywallSheet reason="topic" open={sheetOpen} onClose={() => setSheetOpen(false)} />
+        </>
+      )}
+
+      {outcome.kind === "capped" && (
+        <Card role="alert">
+          <p className="text-sm">{outcome.message}</p>
+          {outcome.suggestions.length > 0 && (
+            <ul className="mt-3 flex flex-col gap-1">
+              {outcome.suggestions.map((suggestion) => (
+                <li key={suggestion.slug}>
+                  <Link href={`/case/${suggestion.slug}`} className="inline-flex min-h-11 items-center text-sm font-semibold underline">
+                    {suggestion.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </Card>
       )}
 
       {outcome.kind === "failed" && (

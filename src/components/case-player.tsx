@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { use, useEffect, useMemo, useRef, useState } from "react";
 
 import type { PlayView } from "@/lib/case/view";
@@ -15,13 +16,14 @@ import { ClueCard, SealedClue } from "./clue-card";
 import { ExhibitGallery } from "./exhibits";
 import { Hypotheses } from "./hypotheses";
 import { IntroPanels } from "./intro-panels";
+import { PaywallSheet } from "./paywall-sheet";
 import { RedStrings } from "./red-strings";
 import { Hearts, ScoreCounter } from "./status-bar";
-import { ErrorState, Spinner } from "./ui";
+import { Card, ErrorState, Spinner } from "./ui";
 
 type Load =
   | { status: "loading" }
-  | { status: "error"; message: string; notFound: boolean }
+  | { status: "error"; message: string; notFound: boolean; code: string }
   | { status: "ready"; playId: string; view: PlayView; showIntro: boolean };
 
 type Notice = { tone: "info" | "error"; text: string };
@@ -52,7 +54,8 @@ async function resumeOrStart(slug: string): Promise<Load> {
     return { status: "ready", playId: started.playId, view: started.view, showIntro };
   } catch (error) {
     const notFound = error instanceof ApiError && error.status === 404;
-    return { status: "error", notFound, message: notFound ? "We couldn't find this case." : messageOf(error) };
+    const code = error instanceof ApiError ? error.code : "unknown";
+    return { status: "error", notFound, code, message: notFound ? "We couldn't find this case." : messageOf(error) };
   }
 }
 
@@ -69,7 +72,9 @@ function changes(before: PlayView, after: PlayView): Fresh {
 
 export function CasePlayer({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
+  const challengeSlug = useSearchParams().get("challenge");
   const [load, setLoad] = useState<Load>({ status: "loading" });
+  const [sheetOpen, setSheetOpen] = useState(true);
   const [attempt, setAttempt] = useState(0);
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState<Notice | null>(null);
@@ -104,6 +109,28 @@ export function CasePlayer({ params }: { params: Promise<{ slug: string }> }) {
   };
 
   if (load.status === "loading") return <Spinner label="Opening the case file" />;
+  if (load.status === "error" && (load.code === "plus_required" || load.code === "not_yet_available")) {
+    const locked = load.code === "plus_required";
+    return (
+      <div className="mx-auto flex max-w-2xl flex-col gap-4">
+        <Card>
+          <h1 className="font-display text-2xl font-semibold">{locked ? "This case is in the Plus archive" : "This case isn't open yet"}</h1>
+          <p className="mt-2 text-sm">{load.message}</p>
+          <div className="mt-3 flex flex-wrap gap-3 text-sm font-semibold">
+            <Link href="/" className="inline-flex min-h-11 items-center rounded-card bg-accent px-4 text-accent-text">
+              Play today&apos;s case
+            </Link>
+            {locked && (
+              <button type="button" onClick={() => setSheetOpen(true)} className="inline-flex min-h-11 items-center underline">
+                See what Plus includes
+              </button>
+            )}
+          </div>
+        </Card>
+        {locked && <PaywallSheet reason="archive" open={sheetOpen} onClose={() => setSheetOpen(false)} />}
+      </div>
+    );
+  }
   if (load.status === "error") {
     return (
       <div className="mx-auto max-w-2xl">
@@ -196,7 +223,16 @@ export function CasePlayer({ params }: { params: Promise<{ slug: string }> }) {
         )}
       </div>
 
-      {ended && <CaseResult view={current} playId={playId} clueNumbers={clueNumbers} promotion={promotion} justEnded={fresh.ended} />}
+      {ended && (
+        <CaseResult
+          view={current}
+          playId={playId}
+          clueNumbers={clueNumbers}
+          promotion={promotion}
+          justEnded={fresh.ended}
+          challengeSlug={challengeSlug}
+        />
+      )}
 
       {!ended && (
         <div className="flex items-end gap-3">

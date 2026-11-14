@@ -1,5 +1,8 @@
 import type { GenerateEvent } from "@/app/api/cases/generate/route";
 import type { CaseSummary, PlayView } from "@/lib/case/view";
+import type { ChallengeView } from "@/lib/challenge/view";
+import type { PlayerStats } from "@/lib/game/stats";
+import type { BillingPeriod, Plan } from "@/lib/player/entitlements";
 import type { Rank } from "@/lib/game/rank";
 
 import { ensurePlayerToken, forgetPlayerToken } from "./player";
@@ -11,6 +14,8 @@ export class ApiError extends Error {
     readonly status: number,
     readonly code: string,
     message: string,
+    /** The parsed error body, for fields beyond code and message (e.g. suggestions). */
+    readonly details: Record<string, unknown> | null = null,
   ) {
     super(message);
     this.name = "ApiError";
@@ -42,7 +47,7 @@ async function request<T>(url: string, init?: RequestInit): Promise<T> {
   const response = await send(url, init);
   const body = (await response.json().catch(() => null)) as { error?: string; message?: string } | null;
   if (!response.ok) {
-    throw new ApiError(response.status, body?.error ?? "unknown", body?.message ?? "Something went wrong. Please try again.");
+    throw new ApiError(response.status, body?.error ?? "unknown", body?.message ?? "Something went wrong. Please try again.", body);
   }
   return body as T;
 }
@@ -54,11 +59,20 @@ export interface PlayResponse {
   promotion?: Rank | null;
 }
 
+export interface PlanInfo {
+  plan: Plan;
+  period: BillingPeriod | null;
+  startedAt: string | null;
+  expiresAt: string | null;
+  canceled: boolean;
+}
+
 export interface Me {
   player: { id: string; nickname: string; avatar: string };
+  plan: PlanInfo;
   streak: number;
   rank: Rank;
-  topicCases: { created: number; free: number };
+  topicCases: { created: number; free: number; unlimited: boolean };
   today: { slug: string; status: "not_started" | "in_progress" | "solved" | "failed"; score: number | null } | null;
 }
 
@@ -79,7 +93,21 @@ export interface LeaderboardResponse {
   total: number;
 }
 
+export interface ArchiveEntry extends CaseSummary {
+  locked: boolean;
+  status: "in_progress" | "solved" | "failed" | null;
+}
+
+const post = (body?: unknown): RequestInit => ({ method: "POST", body: body === undefined ? undefined : JSON.stringify(body) });
+
 export const api = {
+  archive: () => request<{ plan: Plan; cases: ArchiveEntry[] }>("/api/cases/archive"),
+  stats: () => request<{ stats: PlayerStats }>("/api/players/me/stats"),
+  checkout: (plan: Plan, period: BillingPeriod) => request<{ plan: PlanInfo }>("/api/billing/checkout", post({ plan, period })),
+  cancelPlan: () => request<{ plan: PlanInfo }>("/api/billing/cancel", post()),
+  createChallenge: (caseSlug: string) => request<{ slug: string }>("/api/challenges", post({ caseSlug })),
+  challenge: (slug: string) => request<{ challenge: ChallengeView }>(`/api/challenges/${encodeURIComponent(slug)}`),
+  joinChallenge: (slug: string) => request<{ caseSlug: string; playId: string }>(`/api/challenges/${encodeURIComponent(slug)}/join`, post()),
   me: () => request<Me>("/api/players/me"),
   today: () => request<{ view: PlayView }>("/api/cases/today"),
   leaderboard: (slug: string) => request<LeaderboardResponse>(`/api/cases/${slug}/leaderboard`),
@@ -96,7 +124,7 @@ export async function generateCase(topic: string, onEvent: (event: GenerateEvent
   const response = await send("/api/cases/generate", { method: "POST", body: JSON.stringify({ topic }) });
   if (!response.ok || !response.body) {
     const body = (await response.json().catch(() => null)) as { error?: string; message?: string } | null;
-    throw new ApiError(response.status, body?.error ?? "unknown", body?.message ?? "Something went wrong. Please try again.");
+    throw new ApiError(response.status, body?.error ?? "unknown", body?.message ?? "Something went wrong. Please try again.", body);
   }
 
   const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();

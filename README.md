@@ -48,6 +48,7 @@ See `.env.example`.
 | `ANTHROPIC_API_KEY` | Anthropic API key, used server-side only. |
 | `DATABASE_URL` | Neon Postgres pooled connection string, used at runtime. |
 | `DATABASE_URL_UNPOOLED` | Neon direct connection string for migrations (`npm run db:migrate`). |
+| `GENERATION_DAILY_CAP` | Optional; brand-new topic cases the whole site may generate per New York day (default 40). Cached topics stay free. |
 | `VERCEL_PROTECTION_BYPASS` | Optional; lets `scripts/smoke.sh` check protected preview deployments. |
 
 ## AI usage and fallback
