@@ -1,7 +1,7 @@
 import "server-only";
 
-import { AiAllProvidersFailedError, AiProviderError, AiTimeoutError } from "./errors";
-import type { AiAttempt, AiClient, AiProvider, AiRequest } from "./types";
+import { AiAllProvidersFailedError, AiProviderError, AiRefusalError, AiTimeoutError } from "./errors";
+import type { AiAttempt, AiClient, AiCompletion, AiProvider, AiRequest } from "./types";
 
 export interface AiClientOptions {
   /** Per-provider attempt timeout. */
@@ -23,12 +23,13 @@ export function createAiClient(
 
       for (const provider of providers) {
         try {
-          const output = await withTimeout(provider, request, timeoutMs);
+          const completion = await withTimeout(provider, request, timeoutMs);
           return {
-            output,
+            output: completion.text,
             provider: provider.name,
             latencyMs: Date.now() - startedAt,
             fellBack: attempts.length > 0,
+            usage: completion.usage,
           };
         } catch (error) {
           const attempt = toFallbackAttempt(provider.name, error);
@@ -46,7 +47,7 @@ async function withTimeout(
   provider: AiProvider,
   request: AiRequest,
   timeoutMs: number,
-): Promise<string> {
+): Promise<AiCompletion> {
   const controller = new AbortController();
   let timer: ReturnType<typeof setTimeout> | undefined;
   const timeout = new Promise<never>((_, reject) => {
@@ -67,6 +68,7 @@ async function withTimeout(
 
 /** Returns the attempt record when the error warrants trying the next provider, otherwise null. */
 function toFallbackAttempt(provider: string, error: unknown): AiAttempt | null {
+  if (error instanceof AiRefusalError) return null;
   if (error instanceof AiTimeoutError) {
     return { provider, reason: "timeout", message: error.message };
   }

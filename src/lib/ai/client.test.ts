@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { createAiClient } from "./client";
-import { AiAllProvidersFailedError, AiProviderError } from "./errors";
+import { AiAllProvidersFailedError, AiProviderError, AiRefusalError } from "./errors";
 import { createMockProvider, type MockBehavior } from "./mock-provider";
-import type { AiProvider } from "./types";
+import type { AiCompletion, AiProvider } from "./types";
 
 const request = { prompt: "hello" };
 const TIMEOUT_MS = 1_000;
@@ -78,7 +78,7 @@ describe("createAiClient", () => {
   });
 
   it("times out a provider that ignores the abort signal", async () => {
-    const stuck: AiProvider = { name: "stuck", complete: () => new Promise<string>(() => {}) };
+    const stuck: AiProvider = { name: "stuck", complete: () => new Promise<AiCompletion>(() => {}) };
     const secondary = provider("secondary", { kind: "succeed" });
     const client = createAiClient([stuck, secondary], { timeoutMs: TIMEOUT_MS });
 
@@ -98,6 +98,28 @@ describe("createAiClient", () => {
     expect(error).toBeInstanceOf(AiProviderError);
     expect(error).toMatchObject({ provider: "primary", status });
     expect(secondary.complete).not.toHaveBeenCalled();
+  });
+
+  it("rethrows a refusal without trying the next provider", async () => {
+    const refusing = spied({
+      name: "refusing",
+      complete: () => Promise.reject(new AiRefusalError("refusing", "general_harms")),
+    });
+    const secondary = provider("secondary", { kind: "succeed" });
+    const client = createAiClient([refusing, secondary], { timeoutMs: TIMEOUT_MS });
+
+    await expect(client.complete(request)).rejects.toBeInstanceOf(AiRefusalError);
+    expect(secondary.complete).not.toHaveBeenCalled();
+  });
+
+  it("passes the provider's token usage through", async () => {
+    const usage = { model: "m", inputTokens: 10, outputTokens: 5, cacheReadTokens: 0, cacheWriteTokens: 0 };
+    const client = createAiClient(
+      [{ name: "metered", complete: async () => ({ text: "ok", usage }) }],
+      { timeoutMs: TIMEOUT_MS },
+    );
+
+    await expect(client.complete(request)).resolves.toMatchObject({ output: "ok", usage });
   });
 
   it("lists every attempt when all providers fail", async () => {
