@@ -50,6 +50,8 @@ async function request<T>(url: string, init?: RequestInit): Promise<T> {
 export interface PlayResponse {
   playId: string;
   view: PlayView;
+  /** Only on the move that ends a case: the new rank it earned, or null. */
+  promotion?: Rank | null;
 }
 
 export interface Me {

@@ -7,7 +7,7 @@ import type { Exhibit } from "@/lib/sources/exhibits";
 import { sampleCase, sampleSource } from "./__fixtures__/sample-case";
 import { fallbackNarration } from "./narration";
 import type { CaseRecord } from "./schema";
-import { buildPlayView } from "./view";
+import { buildPlayView, fittingExhibit } from "./view";
 
 const exhibit: Exhibit = {
   imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/x/800px-Snow-cholera-map.jpg",
@@ -101,7 +101,8 @@ describe("buildPlayView", () => {
     const view = viewAfter({ type: "accuse", hypothesisId: "h3" });
 
     expect(view.hypotheses.find((h) => h.id === "h3")).toEqual(expect.objectContaining({ status: "ruled_out", refutedByClueId: "c5" }));
-    expect(view.clues.find((c) => c.id === "c5")?.sealed).toBe(false);
+    expect(view.clues.find((c) => c.id === "c5")).toMatchObject({ sealed: false, revealedByMistake: true });
+    expect(view.clues[0]).toMatchObject({ sealed: false, revealedByMistake: false });
     expect(view.livesLeft).toBe(2);
   });
 
@@ -118,5 +119,15 @@ describe("buildPlayView", () => {
       sources: [{ title: sampleSource.title, url: sampleSource.url, revisionId: sampleSource.revisionId }],
       learned: record.content.learned,
     });
+  });
+});
+
+describe("fittingExhibit", () => {
+  it("picks the exhibit sharing the most words with an artifact clue, or none", () => {
+    const titled = (title: string): Exhibit => ({ ...exhibit, title });
+    const exhibits = [titled("Broad Street map"), titled("John Snow pump handle replica"), titled("Soho skyline")];
+    expect(fittingExhibit("The pump handle was removed", exhibits)).toBe(1);
+    expect(fittingExhibit("A ledger of brewery wages", exhibits)).toBeNull();
+    expect(fittingExhibit("anything", [])).toBeNull();
   });
 });

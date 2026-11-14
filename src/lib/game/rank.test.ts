@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { rankFor } from "./rank";
+import { promotionFor, rankFor } from "./rank";
 
 describe("rankFor", () => {
   it("starts every player as a Rookie with the first case to go", () => {
@@ -33,5 +33,16 @@ describe("rankFor", () => {
 
   it("treats bad totals as zero", () => {
     expect(rankFor({ cases: -3, points: Number.NaN })).toMatchObject({ name: "Rookie", cases: 0 });
+  });
+});
+
+describe("promotionFor", () => {
+  it("reports the new rank when the finished play crossed a threshold", () => {
+    expect(promotionFor({ cases: 1, points: 700 }, 700)).toMatchObject({ name: "Investigator", level: 2 });
+    expect(promotionFor({ cases: 3, points: 1_600 }, 400)).toMatchObject({ name: "Detective" });
+  });
+
+  it("reports nothing when the rank stayed the same", () => {
+    expect(promotionFor({ cases: 2, points: 900 }, 0)).toBeNull();
   });
 });

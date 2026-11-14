@@ -1,6 +1,6 @@
 import { rulesFor, scoreOf, visibleClueIds, type GameState, type GameStatus } from "@/lib/game/engine";
 import { shareGrid } from "@/lib/game/share";
-import type { Exhibit } from "@/lib/sources/exhibits";
+import { significantWords, type Exhibit } from "@/lib/sources/exhibits";
 
 import { fallbackNarration } from "./narration";
 import type { CaseCategory, CaseKind, CaseRecord, ClueKind } from "./schema";
@@ -25,6 +25,10 @@ export interface OpenClueView {
   body: string;
   quote: string;
   source: { title: string; url: string };
+  /** For an artifact clue: the exhibit whose title shares words with it, shown as its photo. */
+  exhibitIndex: number | null;
+  /** A sealed clue shown for free because it explains a wrong accusation. */
+  revealedByMistake: boolean;
 }
 
 export interface SealedClueView {
@@ -100,6 +104,8 @@ export function buildPlayView(record: CaseRecord, state: GameState): PlayView {
       body: clue.body,
       quote: clue.quote,
       source: { title: source?.title ?? "", url: source?.url ?? "" },
+      exhibitIndex: clue.kind === "artifact" ? fittingExhibit(`${clue.headline} ${clue.body}`, record.exhibits) : null,
+      revealedByMistake: state.revealedClueIds.includes(clue.id),
     };
   });
 
@@ -131,4 +137,15 @@ export function buildPlayView(record: CaseRecord, state: GameState): PlayView {
         }
       : null,
   };
+}
+
+/** Index of the exhibit sharing the most significant words with the text, or null if none shares any. */
+export function fittingExhibit(text: string, exhibits: Exhibit[]): number | null {
+  const words = significantWords(text);
+  let best: { index: number; shared: number } | null = null;
+  exhibits.forEach((exhibit, index) => {
+    const shared = [...significantWords(exhibit.title)].filter((w) => words.has(w)).length;
+    if (shared > 0 && (!best || shared > best.shared)) best = { index, shared };
+  });
+  return best === null ? null : (best as { index: number }).index;
 }

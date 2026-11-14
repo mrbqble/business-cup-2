@@ -45,6 +45,13 @@ export function rankFor(record: PlayerRecord): Rank {
   };
 }
 
+/** The rank a just-finished play earned, or null when it didn't change the rank. */
+export function promotionFor(after: PlayerRecord, finishedScore: number): Rank | null {
+  const now = rankFor(after);
+  const before = rankFor({ cases: after.cases - 1, points: after.points - finishedScore });
+  return now.level > before.level ? now : null;
+}
+
 function wholeOrZero(n: number): number {
   return Number.isFinite(n) ? Math.max(0, Math.floor(n)) : 0;
 }

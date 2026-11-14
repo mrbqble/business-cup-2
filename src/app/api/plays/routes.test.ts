@@ -14,7 +14,12 @@ import { POST as postPlay } from "./route";
 
 vi.mock("next/server", () => ({ connection: () => Promise.resolve() }));
 vi.mock("@/lib/db/cases", () => ({ findCaseBySlug: vi.fn(), findCaseById: vi.fn() }));
-vi.mock("@/lib/db/plays", () => ({ startPlayerPlay: vi.fn(), findPlay: vi.fn(), appendAction: vi.fn() }));
+vi.mock("@/lib/db/plays", () => ({
+  startPlayerPlay: vi.fn(),
+  findPlay: vi.fn(),
+  appendAction: vi.fn(),
+  playerRecord: vi.fn(async () => ({ cases: 1, points: 700 })),
+}));
 vi.mock("@/lib/db/players", () => ({ findPlayerById: vi.fn() }));
 vi.mock("@/lib/player/service", () => ({ authenticate: vi.fn() }));
 
@@ -72,7 +77,7 @@ async function start(token = "alice-token") {
 
 async function act(playId: string, body: unknown, token = "alice-token") {
   const response = await postAction(request(token, body), ctx(playId));
-  return { status: response.status, body: (await response.json()) as { view: PlayView; error?: string } };
+  return { status: response.status, body: (await response.json()) as { view: PlayView; error?: string; promotion?: unknown } };
 }
 
 describe("play routes", () => {
@@ -117,10 +122,13 @@ describe("play routes", () => {
     const wrong = await act(body.playId, { type: "accuse", hypothesisId: "h4" });
     expect(wrong.body.view.hypotheses.find((h) => h.id === "h4")).toMatchObject({ status: "ruled_out", refutedByClueId: "c7" });
     expect(JSON.stringify(wrong.body)).not.toMatch(/"(correct|supports|refutes|correctHypothesisId|grid)"/);
+    expect(wrong.body.view.narration.closing).toBeNull();
+    expect(wrong.body).not.toHaveProperty("promotion");
 
     const solved = await act(body.playId, { type: "accuse", hypothesisId: "h1" });
     expect(solved.body.view).toMatchObject({ status: "solved", score: 700 });
     expect(solved.body.view.result?.grid).toBe("⬛⬛⬛🔎⬛⬛ ❌✅");
+    expect(solved.body.promotion).toMatchObject({ name: "Investigator", level: 2 });
     expect(await act(body.playId, { type: "open", clueId: "c3" })).toMatchObject({ status: 409, body: { error: "game_over" } });
   });
 
