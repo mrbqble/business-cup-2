@@ -20,7 +20,7 @@ TODO: architecture once the product is in.
 
 ## Stack
 
-Next.js (App Router), TypeScript (strict), Tailwind CSS, Vitest. Hosted on Vercel; `main` is production, every other branch gets a preview deployment. CI runs `npm run check` on every push and pull request.
+Next.js (App Router), TypeScript (strict), Tailwind CSS, Vitest. Hosted on Vercel; `main` is production, every other branch gets a preview deployment. CI runs `npm run check` on every push and pull request; the Uptime workflow smoke-checks production every 5 minutes and emails on failure.
 
 ## Run locally
 
