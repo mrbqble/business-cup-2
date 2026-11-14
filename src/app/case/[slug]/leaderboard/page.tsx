@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Leaderboard" };
 
 export default function CaseLeaderboardPage({ params }: PageProps<"/case/[slug]/leaderboard">) {
   return (
-    <main>
+    <main className="mx-auto w-full max-w-2xl">
       <Suspense fallback={<Spinner label="Loading the leaderboard" />}>
         <LeaderboardPage params={params} />
       </Suspense>

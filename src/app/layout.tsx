@@ -1,9 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Special_Elite } from "next/font/google";
 import Link from "next/link";
 
 import { PlayerChip } from "@/components/player-chip";
 
 import "./globals.css";
+
+/** Typewriter face for case-file labels and quotes (Apache 2.0, self-hosted by next/font). */
+const typewriter = Special_Elite({ weight: "400", subsets: ["latin"], variable: "--font-special-elite", display: "swap" });
+
+export const viewport: Viewport = { colorScheme: "dark", themeColor: "#1d1713" };
 
 export const metadata: Metadata = {
   title: { default: "Daily Case", template: "%s · Daily Case" },
@@ -13,23 +19,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${typewriter.variable}`}>
       <body className="flex min-h-full flex-col">
-        <header className="border-b border-border bg-surface">
-          <div className="mx-auto flex w-full max-w-2xl items-baseline justify-between gap-4 px-4 py-3">
-            <Link href="/" className="font-display text-xl font-semibold tracking-tight">
+        <header className="border-b border-border bg-desk-deep/90">
+          <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-4 py-3">
+            <Link href="/" className="flex shrink-0 items-center gap-2 font-typewriter text-lg tracking-tight whitespace-nowrap sm:text-xl">
+              <span aria-hidden className="text-2xl leading-none">🔎</span>
               Daily Case
             </Link>
             <PlayerChip />
           </div>
         </header>
-        <div className="mx-auto w-full max-w-2xl flex-1 px-4 py-6">{children}</div>
+        <div className="mx-auto w-full max-w-5xl flex-1 px-4 py-6">{children}</div>
         <footer className="border-t border-border px-4 py-6 text-center text-xs text-muted">
           Clue quotes come from Wikipedia articles, used under{" "}
           <a href="https://creativecommons.org/licenses/by-sa/4.0/" className="underline" rel="license">
             CC BY-SA 4.0
           </a>
-          . Every quote links to the article it comes from.
+          . Every quote links to the article it comes from. Exhibit images come from Wikimedia Commons; each shows its author and
+          license.
         </footer>
       </body>
     </html>

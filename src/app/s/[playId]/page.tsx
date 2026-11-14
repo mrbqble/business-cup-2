@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function SharedResultPage({ params }: PageProps<"/s/[playId]">) {
   return (
-    <main>
+    <main className="mx-auto w-full max-w-2xl">
       <Suspense fallback={<Spinner label="Loading the result" />}>
         <SharedResult params={params} />
       </Suspense>

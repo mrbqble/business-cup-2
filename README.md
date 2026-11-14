@@ -35,6 +35,8 @@ npm run check      # lint, typecheck, test, build
 
 Smoke-check a deployment: `scripts/smoke.sh <base-url> [expected-commit-sha]`.
 
+Add archive images (Wikimedia Commons) and narration to stored cases that lack them: `npm run cases:backfill` (`--only exhibits` needs no AI key).
+
 ## Environment variables
 
 See `.env.example`.
@@ -42,7 +44,7 @@ See `.env.example`.
 | Name | Purpose |
 |---|---|
 | `AI_PROVIDERS` | Ordered provider chain for case generation (default `claude-sonnet,claude-haiku`; `mock` for tests). |
-| `AI_SAFETY_PROVIDERS` | Provider chain for the topic safety check (default `claude-haiku`). |
+| `AI_SAFETY_PROVIDERS` | Cheap provider chain for the topic safety check and comic-panel narration (default `claude-haiku`). |
 | `ANTHROPIC_API_KEY` | Anthropic API key, used server-side only. |
 | `DATABASE_URL` | Neon Postgres pooled connection string, used at runtime. |
 | `DATABASE_URL_UNPOOLED` | Neon direct connection string for migrations (`npm run db:migrate`). |
