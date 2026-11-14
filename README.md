@@ -8,7 +8,7 @@ TODO: problem, target user, what they pay for.
 
 ## Live
 
-TODO: production URL.
+https://business-cup-2-azure.vercel.app
 
 ## How it works
 
