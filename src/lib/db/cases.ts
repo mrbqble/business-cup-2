@@ -94,3 +94,35 @@ export async function updateCasePresentation(id: string, values: { exhibits?: Ex
   if (values.exhibits === undefined && values.narration === undefined) return;
   await getDb().update(cases).set(values).where(eq(cases.id, id));
 }
+
+/** Past daily cases (before today's) and archive cases, newest first. */
+export async function listArchiveCases(todaysCaseDateKey: string | null): Promise<CaseRecord[]> {
+  const pastDaily = todaysCaseDateKey
+    ? and(eq(cases.kind, "daily"), sql`${cases.dateKey} < ${todaysCaseDateKey}`)
+    : eq(cases.kind, "daily");
+  const rows = await getDb()
+    .select()
+    .from(cases)
+    .where(sql`(${pastDaily}) or ${cases.kind} = 'archive'`)
+    .orderBy(desc(cases.dateKey), desc(cases.createdAt));
+  return rows.map(toCaseRecord);
+}
+
+/** Brand-new topic cases created on a New York calendar day; the daily generation cap counts these. */
+export async function countTopicCasesCreatedOn(dateKey: string): Promise<number> {
+  const [row] = await getDb()
+    .select({ count: sql<number>`count(*)::int` })
+    .from(cases)
+    .where(and(eq(cases.kind, "topic"), sql`(${cases.createdAt} at time zone 'America/New_York')::date = ${dateKey}::date`));
+  return row?.count ?? 0;
+}
+
+/** Topic cases someone already opened: free and instant for everyone. */
+export async function recentTopicCases(limit = 6): Promise<{ slug: string; title: string }[]> {
+  return getDb()
+    .select({ slug: cases.slug, title: cases.title })
+    .from(cases)
+    .where(eq(cases.kind, "topic"))
+    .orderBy(desc(cases.createdAt))
+    .limit(limit);
+}

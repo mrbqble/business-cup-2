@@ -3,8 +3,9 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { sampleCase, sampleSource } from "@/lib/case/__fixtures__/sample-case";
 import type { CaseRecord } from "@/lib/case/schema";
 import type { PlayView } from "@/lib/case/view";
-import { findCaseById, findCaseBySlug } from "@/lib/db/cases";
-import { appendAction, findPlay, startPlayerPlay } from "@/lib/db/plays";
+import { findCaseById, findCaseBySlug, findDailyCase } from "@/lib/db/cases";
+import { hasChallengeEntryForCase } from "@/lib/db/challenges";
+import { appendAction, findPlay, findPlayerPlay, startPlayerPlay } from "@/lib/db/plays";
 import type { PlayerRow, PlayRow } from "@/lib/db/schema";
 import { authenticate } from "@/lib/player/service";
 
@@ -13,10 +14,13 @@ import { POST as postAction } from "./[id]/actions/route";
 import { POST as postPlay } from "./route";
 
 vi.mock("next/server", () => ({ connection: () => Promise.resolve() }));
-vi.mock("@/lib/db/cases", () => ({ findCaseBySlug: vi.fn(), findCaseById: vi.fn() }));
+vi.mock("@/lib/db/cases", () => ({ findCaseBySlug: vi.fn(), findCaseById: vi.fn(), findDailyCase: vi.fn() }));
+vi.mock("@/lib/db/challenges", () => ({ hasChallengeEntryForCase: vi.fn(async () => false) }));
+vi.mock("@/lib/time", () => ({ todayDateKey: () => "2026-11-15" }));
 vi.mock("@/lib/db/plays", () => ({
   startPlayerPlay: vi.fn(),
   findPlay: vi.fn(),
+  findPlayerPlay: vi.fn(),
   appendAction: vi.fn(),
   playerRecord: vi.fn(async () => ({ cases: 1, points: 700 })),
 }));
@@ -35,9 +39,21 @@ const record: CaseRecord = {
   narration: null,
 };
 
-const ALICE = { id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa", nickname: "Curious Otter", avatar: "🦦", tokenHash: "a", createdAt: new Date() };
-const BOB = { id: "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb", nickname: "Bold Fox", avatar: "🦊", tokenHash: "b", createdAt: new Date() };
-const TOKENS: Record<string, PlayerRow> = { "alice-token": ALICE, "bob-token": BOB };
+const ALICE = { id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa", nickname: "Curious Otter", avatar: "🦦", tokenHash: "a", plan: "free" as const, planPeriod: null, planStartedAt: null, planExpiresAt: null, planCanceledAt: null, createdAt: new Date() };
+const BOB = { id: "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb", nickname: "Bold Fox", avatar: "🦊", tokenHash: "b", plan: "free" as const, planPeriod: null, planStartedAt: null, planExpiresAt: null, planCanceledAt: null, createdAt: new Date() };
+const CAROL: PlayerRow = {
+  ...ALICE,
+  id: "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+  plan: "plus",
+  planPeriod: "yearly",
+  planStartedAt: new Date("2026-11-01T00:00:00Z"),
+  planExpiresAt: new Date("2099-11-01T00:00:00Z"),
+};
+const TOKENS: Record<string, PlayerRow> = { "alice-token": ALICE, "bob-token": BOB, "carol-token": CAROL };
+const archiveCase: CaseRecord = { ...record, id: "33333333-3333-4333-8333-333333333333", slug: "archive-case", kind: "archive", dateKey: null, number: null };
+const pastDaily: CaseRecord = { ...record, id: "44444444-4444-4444-8444-444444444444", slug: "past-daily", dateKey: "2026-11-14", number: 1 };
+const futureDaily: CaseRecord = { ...record, id: "55555555-5555-4555-8555-555555555555", slug: "future-daily", dateKey: "2026-11-16", number: 3 };
+const CASES = [record, archiveCase, pastDaily, futureDaily];
 
 /** An in-memory stand-in for the plays table with the same uniqueness and concurrency contract. */
 function usePlayStore() {
@@ -52,6 +68,9 @@ function usePlayStore() {
     return { play: row, created: true };
   });
   vi.mocked(findPlay).mockImplementation(async (id) => rows.get(id) ?? null);
+  vi.mocked(findPlayerPlay).mockImplementation(
+    async (caseId, playerId) => [...rows.values()].find((r) => r.caseId === caseId && r.playerId === playerId) ?? null,
+  );
   vi.mocked(appendAction).mockImplementation(async (id, expected, action, state) => {
     const row = rows.get(id);
     if (!row || row.actions.length !== expected) return null;
@@ -82,8 +101,10 @@ async function act(playId: string, body: unknown, token = "alice-token") {
 
 describe("play routes", () => {
   beforeEach(() => {
-    vi.mocked(findCaseBySlug).mockImplementation(async (slug) => (slug === record.slug ? record : null));
-    vi.mocked(findCaseById).mockImplementation(async (id) => (id === record.id ? record : null));
+    vi.mocked(findCaseBySlug).mockImplementation(async (slug) => CASES.find((c) => c.slug === slug) ?? null);
+    vi.mocked(findCaseById).mockImplementation(async (id) => CASES.find((c) => c.id === id) ?? null);
+    vi.mocked(findDailyCase).mockResolvedValue(record);
+    vi.mocked(hasChallengeEntryForCase).mockResolvedValue(false);
     vi.mocked(authenticate).mockImplementation(async (req) => {
       const token = req.headers.get("authorization")?.replace("Bearer ", "") ?? "";
       return TOKENS[token] ?? null;
@@ -147,6 +168,26 @@ describe("play routes", () => {
     expect(await act(body.playId, { type: "accuse", hypothesisId: "h9" })).toMatchObject({ status: 400, body: { error: "unknown_hypothesis" } });
     expect(await act(body.playId, { type: "peek", clueId: "c3" })).toMatchObject({ status: 400, body: { error: "invalid_request" } });
     expect(await act("not-a-uuid", { type: "open", clueId: "c3" })).toMatchObject({ status: 404 });
+  });
+
+  it("keeps past and archive cases for Plus, but never blocks a challenge or a review", async () => {
+    const startAs = async (token: string, caseSlug: string) => (await postPlay(request(token, { caseSlug }))).status;
+
+    expect(await startAs("alice-token", "archive-case")).toBe(403);
+    expect(await (await postPlay(request("alice-token", { caseSlug: "past-daily" }))).json()).toMatchObject({ error: "plus_required" });
+    expect(await startAs("carol-token", "archive-case")).toBe(201);
+    expect(await startAs("carol-token", "past-daily")).toBe(201);
+
+    vi.mocked(hasChallengeEntryForCase).mockResolvedValue(true);
+    expect(await startAs("alice-token", "archive-case")).toBe(201);
+    vi.mocked(hasChallengeEntryForCase).mockResolvedValue(false);
+    expect(await startAs("alice-token", "archive-case")).toBe(200);
+  });
+
+  it("keeps future daily cases closed for everyone", async () => {
+    const response = await postPlay(request("carol-token", { caseSlug: "future-daily" }));
+    expect(response.status).toBe(403);
+    expect(await response.json()).toMatchObject({ error: "not_yet_available" });
   });
 
   it("reports a conflict when another move landed between read and write", async () => {

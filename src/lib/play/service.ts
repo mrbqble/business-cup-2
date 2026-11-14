@@ -3,12 +3,16 @@ import "server-only";
 import { z } from "zod";
 
 import { buildPlayView, summarize, type CaseSummary, type PlayView } from "@/lib/case/view";
-import { findCaseById, findCaseBySlug } from "@/lib/db/cases";
-import { appendAction, findPlay, playerRecord, startPlayerPlay } from "@/lib/db/plays";
+import { findCaseById, findCaseBySlug, findDailyCase } from "@/lib/db/cases";
+import { hasChallengeEntryForCase } from "@/lib/db/challenges";
+import { appendAction, findPlay, findPlayerPlay, playerRecord, startPlayerPlay } from "@/lib/db/plays";
+import type { PlayerRow } from "@/lib/db/schema";
 import { findPlayerById } from "@/lib/db/players";
 import { applyAction, replay, rulesFor, scoreOf, type ActionError, type GameAction } from "@/lib/game/engine";
 import { promotionFor, type Rank } from "@/lib/game/rank";
 import { shareGrid } from "@/lib/game/share";
+import { activePlan, caseAccess } from "@/lib/player/entitlements";
+import { todayDateKey } from "@/lib/time";
 
 export const gameActionSchema = z.discriminatedUnion("type", [
   z.object({ type: z.literal("open"), clueId: z.string().min(1) }),
@@ -18,13 +22,33 @@ export const gameActionSchema = z.discriminatedUnion("type", [
 export type PlayResult =
   | { ok: true; playId: string; view: PlayView; created?: boolean; promotion?: Rank | null }
   | { ok: false; error: PlayError };
-export type PlayError = "case_not_found" | "play_not_found" | "conflict" | ActionError;
+export type PlayError = "case_not_found" | "play_not_found" | "conflict" | "plus_required" | "not_yet_available" | ActionError;
 
-/** Starts the player's play of a case, or resumes it when they already have one. */
-export async function startPlay(caseSlug: string, playerId: string): Promise<PlayResult> {
+/**
+ * Starts the player's play of a case, or resumes it when they already have one. A new play must
+ * pass the access rules: Plus for past and archive cases, never for today's case or a challenge.
+ */
+export async function startPlay(caseSlug: string, player: PlayerRow): Promise<PlayResult> {
   const record = await findCaseBySlug(caseSlug);
   if (!record) return { ok: false, error: "case_not_found" };
-  const { play, created } = await startPlayerPlay(record.id, playerId);
+  if (!(await findPlayerPlay(record.id, player.id))) {
+    const today = todayDateKey();
+    const [todays, viaChallenge] = await Promise.all([
+      record.kind === "daily" ? findDailyCase(today) : null,
+      record.kind === "topic" ? false : hasChallengeEntryForCase(player.id, record.id),
+    ]);
+    const access = caseAccess({
+      kind: record.kind,
+      dateKey: record.dateKey,
+      today,
+      todaysCaseDateKey: todays?.dateKey ?? null,
+      plan: activePlan(player),
+      hasPlay: false,
+      viaChallenge,
+    });
+    if (!access.allowed) return { ok: false, error: access.reason };
+  }
+  const { play, created } = await startPlayerPlay(record.id, player.id);
   const replayed = replay(rulesFor(record.content), play.actions);
   if (!replayed.ok) throw new Error(`Recorded actions of play ${play.id} no longer replay: ${replayed.error}`);
   return { ok: true, playId: play.id, view: buildPlayView(record, replayed.state), created };

@@ -33,7 +33,7 @@ describe("player tokens", () => {
 describe("canCreateTopicCase", () => {
   it("allows exactly the free topic cases", () => {
     expect(FREE_TOPIC_CASES).toBe(1);
-    expect(canCreateTopicCase(0)).toBe(true);
-    expect(canCreateTopicCase(1)).toBe(false);
+    expect(canCreateTopicCase("free", 0)).toBe(true);
+    expect(canCreateTopicCase("free", 1)).toBe(false);
   });
 });
