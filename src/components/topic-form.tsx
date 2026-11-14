@@ -6,6 +6,7 @@ import { useState, type FormEvent } from "react";
 import { MAX_TOPIC_LENGTH, MIN_TOPIC_LENGTH } from "@/lib/case/topic";
 import { useMe } from "@/lib/client/me";
 
+import { PaywallSheet } from "./paywall-sheet";
 import { Button } from "./ui";
 
 const EXAMPLES = ["The Rosetta Stone", "The Antikythera mechanism", "The discovery of penicillin", "The Great Moon Hoax of 1835"];
@@ -15,7 +16,9 @@ export function TopicForm() {
   const [topic, setTopic] = useState("");
   const [error, setError] = useState<string | null>(null);
   const me = useMe();
+  const unlimited = me.status === "ready" && me.me.topicCases.unlimited;
   const freeLeft = me.status === "ready" ? Math.max(0, me.me.topicCases.free - me.me.topicCases.created) : null;
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   function start(value: string) {
     const trimmed = value.trim();
@@ -70,13 +73,25 @@ export function TopicForm() {
           </button>
         ))}
       </div>
-      {freeLeft !== null && (
-        <p className="text-xs text-muted">
-          {freeLeft > 0
-            ? "Your first new case on any topic is free. Topics someone already opened are always free."
-            : "You've used your free new topic case. Unlimited topic cases come with Plus; topics someone already opened stay free."}
-        </p>
+      {unlimited ? (
+        <p className="text-xs text-muted">Plus: unlimited new cases on any topic.</p>
+      ) : (
+        freeLeft !== null && (
+          <p className="text-xs text-muted">
+            {freeLeft > 0 ? (
+              "Your first new case on any topic is free. Topics someone already opened are always free."
+            ) : (
+              <>
+                You&apos;ve used your free new topic case; topics someone already opened stay free.{" "}
+                <button type="button" onClick={() => setSheetOpen(true)} className="inline-flex min-h-11 items-center font-semibold underline">
+                  Unlimited topic cases come with Plus
+                </button>
+              </>
+            )}
+          </p>
+        )
       )}
+      <PaywallSheet reason="topic" open={sheetOpen} onClose={() => setSheetOpen(false)} />
     </form>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Special_Elite } from "next/font/google";
 import Link from "next/link";
 
+import { HeaderMenu } from "@/components/header-menu";
 import { PlayerChip } from "@/components/player-chip";
 
 import "./globals.css";
@@ -23,11 +24,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col">
         <header className="border-b border-border bg-desk-deep/90">
           <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-4 py-3">
-            <Link href="/" className="flex shrink-0 items-center gap-2 font-typewriter text-lg tracking-tight whitespace-nowrap sm:text-xl">
+            <Link href="/" className="flex min-h-11 shrink-0 items-center gap-2 font-typewriter text-lg tracking-tight whitespace-nowrap sm:text-xl">
               <span aria-hidden className="text-2xl leading-none">🔎</span>
               Daily Case
             </Link>
-            <PlayerChip />
+            <div className="flex items-center gap-2 sm:gap-3">
+              <PlayerChip />
+              <HeaderMenu />
+            </div>
           </div>
         </header>
         <div className="mx-auto w-full max-w-5xl flex-1 px-4 py-6">{children}</div>
@@ -38,6 +42,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </a>
           . Every quote links to the article it comes from. Exhibit images come from Wikimedia Commons; each shows its author and
           license.
+          <span className="mt-3 block">
+            <Link href="/pricing" className="inline-flex min-h-11 items-center font-semibold underline">
+              Plans and pricing
+            </Link>
+          </span>
         </footer>
       </body>
     </html>

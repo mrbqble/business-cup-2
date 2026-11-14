@@ -1,6 +1,6 @@
 import "server-only";
 
-import { and, eq, ne, sql } from "drizzle-orm";
+import { and, eq, inArray, ne, sql } from "drizzle-orm";
 
 import { initialState, scoreOf, type GameAction, type GameState } from "@/lib/game/engine";
 import type { PlayerRecord } from "@/lib/game/rank";
@@ -59,6 +59,29 @@ export async function playerRecord(playerId: string): Promise<PlayerRecord> {
     .from(plays)
     .where(eq(plays.playerId, playerId));
   return { cases: row?.cases ?? 0, points: row?.points ?? 0 };
+}
+
+/** Lifetime counts for personal stats. */
+export async function playerSummary(playerId: string): Promise<{ finished: number; solved: number; points: number }> {
+  const [row] = await getDb()
+    .select({
+      finished: sql<number>`(count(*) filter (where ${plays.status} <> 'in_progress'))::int`,
+      solved: sql<number>`(count(*) filter (where ${plays.status} = 'solved'))::int`,
+      points: sql<number>`(coalesce(sum(${plays.score}) filter (where ${plays.status} <> 'in_progress'), 0))::int`,
+    })
+    .from(plays)
+    .where(eq(plays.playerId, playerId));
+  return { finished: row?.finished ?? 0, solved: row?.solved ?? 0, points: row?.points ?? 0 };
+}
+
+/** The player's play status for each of the given cases that they have started. */
+export async function playStatuses(playerId: string, caseIds: string[]): Promise<Map<string, PlayRow["status"]>> {
+  if (caseIds.length === 0) return new Map();
+  const rows = await getDb()
+    .select({ caseId: plays.caseId, status: plays.status })
+    .from(plays)
+    .where(and(eq(plays.playerId, playerId), inArray(plays.caseId, caseIds)));
+  return new Map(rows.map((r) => [r.caseId, r.status]));
 }
 
 /**

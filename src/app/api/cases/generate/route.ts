@@ -5,11 +5,13 @@ import { GenerationError, type GenerationEvent } from "@/lib/case/generate";
 import { checkTopicRules, checkTopicSafety } from "@/lib/case/safety";
 import { createCase } from "@/lib/case/service";
 import { MAX_TOPIC_LENGTH, normalizeTopic } from "@/lib/case/topic";
-import { countTopicCasesCreatedBy, findTopicCase } from "@/lib/db/cases";
-import { jsonError, NO_STORE, readJson, unauthorized } from "@/lib/http";
-import { canCreateTopicCase } from "@/lib/player/entitlements";
+import { countTopicCasesCreatedBy, countTopicCasesCreatedOn, findTopicCase, recentTopicCases } from "@/lib/db/cases";
+import { json, jsonError, NO_STORE, readJson, unauthorized } from "@/lib/http";
+import { activePlan, canCreateTopicCase } from "@/lib/player/entitlements";
 import { authenticate } from "@/lib/player/service";
 import { clientIp, createRateLimiter, tooManyRequests } from "@/lib/rate-limit";
+import { generationDailyCap } from "@/lib/rate-limit/daily-cap";
+import { todayDateKey } from "@/lib/time";
 
 /** Drafting plus up to two repair rounds can take a few minutes on long sources. */
 export const maxDuration = 300;
@@ -41,11 +43,23 @@ export async function POST(request: Request): Promise<Response> {
   const cached = await findTopicCase(normalizeTopic(topic));
   if (cached) return ndjson([{ type: "done", slug: cached.slug }]);
 
-  if (!canCreateTopicCase(await countTopicCasesCreatedBy(player.id))) {
+  if (!canCreateTopicCase(activePlan(player), await countTopicCasesCreatedBy(player.id))) {
     return jsonError(
       403,
       "topic_limit",
       "You've used your free case on a topic. Unlimited topic cases come with Plus. Today's case is always free.",
+    );
+  }
+
+  // Budget guard: a site-wide cap on brand-new cases per New York day. Cached topics stay open.
+  if ((await countTopicCasesCreatedOn(todayDateKey())) >= generationDailyCap()) {
+    return json(
+      {
+        error: "daily_cap",
+        message: "We've built today's quota of brand-new cases. Cases someone already opened are free and instant: try one of these, or play today's case.",
+        suggestions: await recentTopicCases(),
+      },
+      429,
     );
   }
 

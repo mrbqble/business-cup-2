@@ -19,7 +19,7 @@ vi.mock("@/lib/player/service", async (importOriginal) => ({
 }));
 vi.mock("@/lib/time", () => ({ todayDateKey: () => "2026-11-15" }));
 
-const PLAYER: PlayerRow = { id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa", nickname: "Curious Otter", avatar: "🦦", tokenHash: "secret-hash", createdAt: new Date() };
+const PLAYER: PlayerRow = { id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa", nickname: "Curious Otter", avatar: "🦦", tokenHash: "secret-hash", plan: "free" as const, planPeriod: null, planStartedAt: null, planExpiresAt: null, planCanceledAt: null, createdAt: new Date() };
 
 describe("POST /api/players", () => {
   it("creates an anonymous player and returns its token once", async () => {
@@ -66,7 +66,8 @@ describe("GET /api/players/me", () => {
       player: { id: PLAYER.id, nickname: "Curious Otter", avatar: "🦦" },
       streak: 2,
       rank: { name: "Detective", level: 3, cases: 3, points: 1_600, next: { name: "Inspector", casesToGo: 4, pointsToGo: 2_400 } },
-      topicCases: { created: 1, free: 1 },
+      plan: { plan: "free", period: null, startedAt: null, expiresAt: null, canceled: false },
+      topicCases: { created: 1, free: 1, unlimited: false },
       today: { slug: "broad-street", status: "solved", score: 800 },
     });
     expect(JSON.stringify(body)).not.toContain("secret-hash");

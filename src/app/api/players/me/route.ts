@@ -5,11 +5,12 @@ import { findPlayerPlay, finishedDailyDays, playerRecord } from "@/lib/db/plays"
 import { rankFor } from "@/lib/game/rank";
 import { currentStreak } from "@/lib/game/streak";
 import { json, unauthorized } from "@/lib/http";
-import { FREE_TOPIC_CASES } from "@/lib/player/entitlements";
+import { planView } from "@/lib/player/billing";
+import { activePlan, FREE_TOPIC_CASES, isPaid } from "@/lib/player/entitlements";
 import { authenticate, publicPlayer } from "@/lib/player/service";
 import { todayDateKey } from "@/lib/time";
 
-/** The player's profile, streak, detective rank, free topic case use and today's result. */
+/** The player's profile, plan, streak, detective rank, free topic case use and today's result. */
 export async function GET(request: Request): Promise<Response> {
   await connection();
   const player = await authenticate(request);
@@ -28,7 +29,8 @@ export async function GET(request: Request): Promise<Response> {
     player: publicPlayer(player),
     streak: currentStreak(days, today),
     rank: rankFor(record),
-    topicCases: { created: topicCasesCreated, free: FREE_TOPIC_CASES },
+    plan: planView(player),
+    topicCases: { created: topicCasesCreated, free: FREE_TOPIC_CASES, unlimited: isPaid(activePlan(player)) },
     today: todayCase
       ? { slug: todayCase.slug, status: todayPlay?.status ?? "not_started", score: todayPlay?.score ?? null }
       : null,

@@ -14,7 +14,15 @@ export async function POST(request: Request): Promise<Response> {
   const parsed = body.safeParse(await readJson(request));
   if (!parsed.success) return jsonError(400, "invalid_request", "Send { caseSlug }.");
 
-  const result = await startPlay(parsed.data.caseSlug, player.id);
-  if (!result.ok) return jsonError(404, "case_not_found", "We couldn't find that case.");
+  const result = await startPlay(parsed.data.caseSlug, player);
+  if (!result.ok) {
+    if (result.error === "plus_required") {
+      return jsonError(403, "plus_required", "Past and archive cases come with Plus. Today's case is always free.");
+    }
+    if (result.error === "not_yet_available") {
+      return jsonError(403, "not_yet_available", "This daily case isn't open yet. It unlocks at midnight New York time on its date.");
+    }
+    return jsonError(404, "case_not_found", "We couldn't find that case.");
+  }
   return json({ playId: result.playId, view: result.view }, result.created ? 201 : 200);
 }

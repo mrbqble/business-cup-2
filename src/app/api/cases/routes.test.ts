@@ -5,7 +5,7 @@ import { sampleCase, sampleSource } from "@/lib/case/__fixtures__/sample-case";
 import { checkTopicSafety } from "@/lib/case/safety";
 import type { CaseRecord } from "@/lib/case/schema";
 import { createCase } from "@/lib/case/service";
-import { countTopicCasesCreatedBy, findCaseBySlug, findDailyCase, findTopicCase } from "@/lib/db/cases";
+import { countTopicCasesCreatedBy, countTopicCasesCreatedOn, findCaseBySlug, findDailyCase, findTopicCase } from "@/lib/db/cases";
 import { caseLeaderboard } from "@/lib/db/leaderboard";
 import type { PlayerRow } from "@/lib/db/schema";
 import { authenticate } from "@/lib/player/service";
@@ -21,6 +21,8 @@ vi.mock("@/lib/db/cases", () => ({
   findCaseBySlug: vi.fn(),
   findTopicCase: vi.fn(),
   countTopicCasesCreatedBy: vi.fn(),
+  countTopicCasesCreatedOn: vi.fn(),
+  recentTopicCases: vi.fn(async () => [{ slug: "cached-case", title: "How did a slab unlock hieroglyphs?" }]),
 }));
 vi.mock("@/lib/db/leaderboard", () => ({ caseLeaderboard: vi.fn() }));
 vi.mock("@/lib/player/service", () => ({ authenticate: vi.fn() }));
@@ -46,7 +48,7 @@ const record: CaseRecord = {
   narration: null,
 };
 
-const PLAYER: PlayerRow = { id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa", nickname: "Curious Otter", avatar: "🦦", tokenHash: "x", createdAt: new Date() };
+const PLAYER: PlayerRow = { id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa", nickname: "Curious Otter", avatar: "🦦", tokenHash: "x", plan: "free" as const, planPeriod: null, planStartedAt: null, planExpiresAt: null, planCanceledAt: null, createdAt: new Date() };
 
 function generateRequest(topic: unknown, ip = "203.0.113.1", token: string | null = "player-token") {
   return new Request("http://test/api/cases/generate", {
@@ -113,6 +115,7 @@ describe("POST /api/cases/generate", () => {
     vi.mocked(findTopicCase).mockResolvedValue(null);
     vi.mocked(checkTopicSafety).mockResolvedValue({ allowed: true });
     vi.mocked(countTopicCasesCreatedBy).mockResolvedValue(0);
+    vi.mocked(countTopicCasesCreatedOn).mockResolvedValue(0);
     vi.mocked(authenticate).mockImplementation(async (req) => (req.headers.get("authorization") ? PLAYER : null));
   });
 
@@ -131,6 +134,26 @@ describe("POST /api/cases/generate", () => {
 
     vi.mocked(findTopicCase).mockResolvedValue({ ...record, slug: "cached-case" });
     expect(await events(await generate(generateRequest("The Rosetta Stone", "198.51.100.8")))).toEqual([{ type: "done", slug: "cached-case" }]);
+  });
+
+  it("lets a Plus player open more new topic cases", async () => {
+    vi.mocked(countTopicCasesCreatedBy).mockResolvedValue(5);
+    vi.mocked(authenticate).mockResolvedValue({ ...PLAYER, plan: "plus", planPeriod: "yearly", planExpiresAt: new Date(Date.now() + 86_400_000) });
+    vi.mocked(createCase).mockResolvedValue({ ...record, kind: "topic", slug: "plus-case" });
+
+    expect(await events(await generate(generateRequest("The Antikythera mechanism", "198.51.100.20")))).toContainEqual({ type: "done", slug: "plus-case" });
+  });
+
+  it("stops brand-new cases at the daily cap, suggests cached ones, and still opens cached topics", async () => {
+    vi.mocked(countTopicCasesCreatedOn).mockResolvedValue(40);
+
+    const capped = await generate(generateRequest("The Dead Sea Scrolls", "198.51.100.21"));
+    expect(capped.status).toBe(429);
+    expect(await capped.json()).toMatchObject({ error: "daily_cap", suggestions: [{ slug: "cached-case" }] });
+    expect(createCase).not.toHaveBeenCalled();
+
+    vi.mocked(findTopicCase).mockResolvedValue({ ...record, kind: "topic", slug: "cached-case" });
+    expect(await events(await generate(generateRequest("The Dead Sea Scrolls", "198.51.100.21")))).toEqual([{ type: "done", slug: "cached-case" }]);
   });
 
   it("streams progress and finishes with the new case's slug", async () => {

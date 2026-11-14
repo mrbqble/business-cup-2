@@ -13,6 +13,8 @@ const MESSAGES: Record<PlayError, [status: number, message: string]> = {
   clue_visible: [409, "That clue is already open."],
   unknown_hypothesis: [400, "That answer isn't part of this case."],
   already_ruled_out: [409, "That answer is already ruled out."],
+  plus_required: [403, "This case comes with Plus."],
+  not_yet_available: [403, "This case isn't open yet."],
 };
 
 /** Records one move on the player's own play and returns the new server-computed state. */

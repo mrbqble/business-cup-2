@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { index, integer, jsonb, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+import { index, integer, jsonb, pgTable, primaryKey, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 
 import type { Narration } from "../case/narration";
 import type { CaseContent, CaseSource, GenerationInfo } from "../case/schema";
@@ -13,6 +13,13 @@ export const players = pgTable("players", {
   nickname: text("nickname").notNull(),
   avatar: text("avatar").notNull(),
   tokenHash: text("token_hash").notNull().unique(),
+  /** Paid plan (demo checkout); it counts until planExpiresAt, also after a cancel. */
+  plan: text("plan", { enum: ["free", "plus", "family"] }).notNull().default("free"),
+  planPeriod: text("plan_period", { enum: ["monthly", "yearly"] }),
+  planStartedAt: timestamp("plan_started_at", { withTimezone: true }),
+  planExpiresAt: timestamp("plan_expires_at", { withTimezone: true }),
+  /** Set when the player cancels: no renewal, access until planExpiresAt. */
+  planCanceledAt: timestamp("plan_canceled_at", { withTimezone: true }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
@@ -73,7 +80,40 @@ export const plays = pgTable(
   ],
 );
 
+/** A "Challenge a friend" link: one per challenger and case. */
+export const challenges = pgTable(
+  "challenges",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    slug: text("slug").notNull().unique(),
+    caseId: uuid("case_id")
+      .notNull()
+      .references(() => cases.id, { onDelete: "cascade" }),
+    challengerId: uuid("challenger_id")
+      .notNull()
+      .references(() => players.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [uniqueIndex("challenges_challenger_case").on(table.challengerId, table.caseId)],
+);
+
+/** Everyone who took a challenge from its link, the challenger included. */
+export const challengeEntries = pgTable(
+  "challenge_entries",
+  {
+    challengeId: uuid("challenge_id")
+      .notNull()
+      .references(() => challenges.id, { onDelete: "cascade" }),
+    playerId: uuid("player_id")
+      .notNull()
+      .references(() => players.id, { onDelete: "cascade" }),
+    joinedAt: timestamp("joined_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [primaryKey({ columns: [table.challengeId, table.playerId] }), index("challenge_entries_player").on(table.playerId)],
+);
+
 export type PlayerRow = typeof players.$inferSelect;
 export type CaseRow = typeof cases.$inferSelect;
 export type NewCaseRow = typeof cases.$inferInsert;
 export type PlayRow = typeof plays.$inferSelect;
+export type ChallengeRow = typeof challenges.$inferSelect;

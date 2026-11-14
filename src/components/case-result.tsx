@@ -7,6 +7,7 @@ import { useMe } from "@/lib/client/me";
 import type { Rank } from "@/lib/game/rank";
 
 import { Archivist } from "./archivist";
+import { ChallengeBox } from "./challenge-box";
 import { ExhibitCredit, ExhibitImage } from "./exhibits";
 import { LeaderboardPreview } from "./leaderboard";
 import { ShareResult } from "./share-result";
@@ -19,12 +20,15 @@ export function CaseResult({
   clueNumbers,
   promotion,
   justEnded,
+  challengeSlug = null,
 }: {
   view: PlayView;
   playId: string;
   clueNumbers: Map<string, number>;
   promotion: Rank | null;
   justEnded: boolean;
+  /** Set when the play came from a challenge link: the end screen leads back to the comparison. */
+  challengeSlug?: string | null;
 }) {
   if (!view.result) return null;
   const solved = view.status === "solved";
@@ -77,10 +81,20 @@ export function CaseResult({
         </div>
       </div>
 
+      {challengeSlug && (
+        <Link
+          href={`/c/${encodeURIComponent(challengeSlug)}`}
+          className="paper flex min-h-11 items-center justify-between gap-3 rounded-card p-4 font-display text-lg font-semibold ring-4 ring-caption"
+        >
+          See how you did against your challenger <span aria-hidden>→</span>
+        </Link>
+      )}
+
       <RankCard promotion={promotion} />
 
       <Card>
         <ShareResult view={view} playId={playId} />
+        <ChallengeBox caseSlug={view.case.slug} />
         {view.case.kind === "daily" && <LeaderboardPreview slug={view.case.slug} />}
 
         <h3 className="mt-5 font-semibold">What really happened</h3>

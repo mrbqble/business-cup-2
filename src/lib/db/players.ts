@@ -19,3 +19,10 @@ export async function findPlayerByTokenHash(tokenHash: string): Promise<PlayerRo
   const [row] = await getDb().select().from(players).where(eq(players.tokenHash, tokenHash)).limit(1);
   return row ?? null;
 }
+
+type PlanColumns = Pick<PlayerRow, "plan" | "planPeriod" | "planStartedAt" | "planExpiresAt" | "planCanceledAt">;
+
+export async function updatePlayerPlan(id: string, values: Partial<PlanColumns>): Promise<PlayerRow | null> {
+  const [row] = await getDb().update(players).set(values).where(eq(players.id, id)).returning();
+  return row ?? null;
+}
