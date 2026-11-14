@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { PlayerChip } from "@/components/player-chip";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,7 +20,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/" className="font-display text-xl font-semibold tracking-tight">
               Daily Case
             </Link>
-            <span className="text-right text-xs text-muted sm:text-sm">Real mysteries. Verified quotes.</span>
+            <PlayerChip />
           </div>
         </header>
         <div className="mx-auto w-full max-w-2xl flex-1 px-4 py-6">{children}</div>

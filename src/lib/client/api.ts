@@ -1,5 +1,7 @@
 import type { GenerateEvent } from "@/app/api/cases/generate/route";
-import type { PlayView } from "@/lib/case/view";
+import type { CaseSummary, PlayView } from "@/lib/case/view";
+
+import { ensurePlayerToken, forgetPlayerToken } from "./player";
 
 export type { GenerateEvent };
 
@@ -16,13 +18,27 @@ export class ApiError extends Error {
 
 const NETWORK_MESSAGE = "We couldn't reach Daily Case. Check your connection and try again.";
 
-async function request<T>(url: string, init?: RequestInit): Promise<T> {
+/** Sends a request as this device's player; on an unknown token it starts a fresh player once and retries. */
+async function send(url: string, init: RequestInit = {}, retried = false): Promise<Response> {
   let response: Response;
   try {
-    response = await fetch(url, { ...init, headers: { "Content-Type": "application/json", ...init?.headers } });
+    const token = await ensurePlayerToken();
+    response = await fetch(url, {
+      ...init,
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`, ...init.headers },
+    });
   } catch {
     throw new ApiError(0, "network", NETWORK_MESSAGE);
   }
+  if (response.status === 401 && !retried) {
+    forgetPlayerToken();
+    return send(url, init, true);
+  }
+  return response;
+}
+
+async function request<T>(url: string, init?: RequestInit): Promise<T> {
+  const response = await send(url, init);
   const body = (await response.json().catch(() => null)) as { error?: string; message?: string } | null;
   if (!response.ok) {
     throw new ApiError(response.status, body?.error ?? "unknown", body?.message ?? "Something went wrong. Please try again.");
@@ -35,8 +51,34 @@ export interface PlayResponse {
   view: PlayView;
 }
 
+export interface Me {
+  player: { id: string; nickname: string; avatar: string };
+  streak: number;
+  topicCases: { created: number; free: number };
+  today: { slug: string; status: "not_started" | "in_progress" | "solved" | "failed"; score: number | null } | null;
+}
+
+export interface LeaderboardEntryView {
+  rank: number;
+  nickname: string;
+  avatar: string;
+  score: number;
+  solved: boolean;
+  durationMs: number;
+  isYou: boolean;
+}
+
+export interface LeaderboardResponse {
+  case: CaseSummary;
+  entries: LeaderboardEntryView[];
+  you: LeaderboardEntryView | null;
+  total: number;
+}
+
 export const api = {
+  me: () => request<Me>("/api/players/me"),
   today: () => request<{ view: PlayView }>("/api/cases/today"),
+  leaderboard: (slug: string) => request<LeaderboardResponse>(`/api/cases/${slug}/leaderboard`),
   startPlay: (caseSlug: string) => request<PlayResponse>("/api/plays", { method: "POST", body: JSON.stringify({ caseSlug }) }),
   getPlay: (playId: string) => request<PlayResponse>(`/api/plays/${playId}`),
   open: (playId: string, clueId: string) =>
@@ -46,18 +88,8 @@ export const api = {
 };
 
 /** Starts a topic generation and calls `onEvent` for each NDJSON event as it arrives. */
-export async function generateCase(topic: string, onEvent: (event: GenerateEvent) => void, signal?: AbortSignal): Promise<void> {
-  let response: Response;
-  try {
-    response = await fetch("/api/cases/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ topic }),
-      signal,
-    });
-  } catch {
-    throw new ApiError(0, "network", NETWORK_MESSAGE);
-  }
+export async function generateCase(topic: string, onEvent: (event: GenerateEvent) => void): Promise<void> {
+  const response = await send("/api/cases/generate", { method: "POST", body: JSON.stringify({ topic }) });
   if (!response.ok || !response.body) {
     const body = (await response.json().catch(() => null)) as { error?: string; message?: string } | null;
     throw new ApiError(response.status, body?.error ?? "unknown", body?.message ?? "Something went wrong. Please try again.");

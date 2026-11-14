@@ -49,7 +49,9 @@ export function GenerateProgress() {
     try {
       await generateCase(topic, onEvent);
     } catch (error) {
-      if (error instanceof ApiError && error.status === 422) setOutcome({ kind: "refused", message: error.message });
+      if (error instanceof ApiError && (error.status === 422 || error.code === "topic_limit")) {
+        setOutcome({ kind: "refused", message: error.message });
+      }
       else if (error instanceof ApiError && error.status === 429) {
         setOutcome({ kind: "failed", message: "You've opened 3 new cases this hour. Try again later, or play today's case.", retryable: false });
       } else setOutcome({ kind: "failed", message: error instanceof Error ? error.message : "Something went wrong.", retryable: true });

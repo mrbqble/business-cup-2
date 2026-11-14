@@ -18,5 +18,3 @@ export const storage = {
     } catch {}
   },
 };
-
-export const playKey = (caseSlug: string) => `dailycase:play:${caseSlug}`;
