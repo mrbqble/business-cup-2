@@ -5,14 +5,25 @@ import { sampleCase, sampleSource } from "@/lib/case/__fixtures__/sample-case";
 import { checkTopicSafety } from "@/lib/case/safety";
 import type { CaseRecord } from "@/lib/case/schema";
 import { createCase } from "@/lib/case/service";
-import { findCaseBySlug, findDailyCase, findTopicCase } from "@/lib/db/cases";
+import { countTopicCasesCreatedBy, findCaseBySlug, findDailyCase, findTopicCase } from "@/lib/db/cases";
+import { caseLeaderboard } from "@/lib/db/leaderboard";
+import type { PlayerRow } from "@/lib/db/schema";
+import { authenticate } from "@/lib/player/service";
 
+import { GET as getLeaderboard } from "./[slug]/leaderboard/route";
 import { GET as getCase } from "./[slug]/route";
 import { POST as generate } from "./generate/route";
 import { GET as getToday } from "./today/route";
 
 vi.mock("next/server", () => ({ connection: () => Promise.resolve() }));
-vi.mock("@/lib/db/cases", () => ({ findDailyCase: vi.fn(), findCaseBySlug: vi.fn(), findTopicCase: vi.fn() }));
+vi.mock("@/lib/db/cases", () => ({
+  findDailyCase: vi.fn(),
+  findCaseBySlug: vi.fn(),
+  findTopicCase: vi.fn(),
+  countTopicCasesCreatedBy: vi.fn(),
+}));
+vi.mock("@/lib/db/leaderboard", () => ({ caseLeaderboard: vi.fn() }));
+vi.mock("@/lib/player/service", () => ({ authenticate: vi.fn() }));
 vi.mock("@/lib/case/service", () => ({ createCase: vi.fn() }));
 vi.mock("@/lib/case/safety", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@/lib/case/safety")>()),
@@ -33,10 +44,12 @@ const record: CaseRecord = {
   sources: [{ id: "S1", title: sampleSource.title, url: sampleSource.url, revisionId: sampleSource.revisionId }],
 };
 
-function generateRequest(topic: unknown, ip = "203.0.113.1") {
+const PLAYER: PlayerRow = { id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa", nickname: "Curious Otter", avatar: "🦦", tokenHash: "x", createdAt: new Date() };
+
+function generateRequest(topic: unknown, ip = "203.0.113.1", token: string | null = "player-token") {
   return new Request("http://test/api/cases/generate", {
     method: "POST",
-    headers: { "x-forwarded-for": ip },
+    headers: { "x-forwarded-for": ip, ...(token ? { authorization: `Bearer ${token}` } : {}) },
     body: JSON.stringify({ topic }),
   });
 }
@@ -73,10 +86,49 @@ describe("GET /api/cases/today and /api/cases/[slug]", () => {
   });
 });
 
+describe("GET /api/cases/[slug]/leaderboard", () => {
+  it("returns the top entries and the asking player's rank without exposing player ids", async () => {
+    vi.mocked(findCaseBySlug).mockResolvedValue(record);
+    vi.mocked(authenticate).mockResolvedValue(PLAYER);
+    const top = { rank: 1, playerId: "other", nickname: "Bold Fox", avatar: "🦊", score: 900, solved: true, durationMs: 60_000 };
+    const you = { rank: 57, playerId: PLAYER.id, nickname: PLAYER.nickname, avatar: PLAYER.avatar, score: 300, solved: true, durationMs: 90_000 };
+    vi.mocked(caseLeaderboard).mockResolvedValue({ entries: [top], you, total: 80 });
+
+    const response = await getLeaderboard(new Request("http://test", { headers: { authorization: "Bearer t" } }), {
+      params: Promise.resolve({ slug: "broad-street" }),
+    });
+    const body = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(vi.mocked(caseLeaderboard).mock.calls[0]).toEqual([record.id, PLAYER.id]);
+    expect(body).toMatchObject({ total: 80, entries: [{ rank: 1, nickname: "Bold Fox", isYou: false }], you: { rank: 57, isYou: true } });
+    expect(JSON.stringify(body)).not.toContain("playerId");
+  });
+});
+
 describe("POST /api/cases/generate", () => {
   beforeEach(() => {
     vi.mocked(findTopicCase).mockResolvedValue(null);
     vi.mocked(checkTopicSafety).mockResolvedValue({ allowed: true });
+    vi.mocked(countTopicCasesCreatedBy).mockResolvedValue(0);
+    vi.mocked(authenticate).mockImplementation(async (req) => (req.headers.get("authorization") ? PLAYER : null));
+  });
+
+  it("requires a player token", async () => {
+    expect((await generate(generateRequest("The Rosetta Stone", "198.51.100.9", null))).status).toBe(401);
+    expect(createCase).not.toHaveBeenCalled();
+  });
+
+  it("refuses a second new topic case for the same player, politely, but still opens cached topics", async () => {
+    vi.mocked(countTopicCasesCreatedBy).mockResolvedValue(1);
+
+    const limited = await generate(generateRequest("The Rosetta Stone", "198.51.100.8"));
+    expect(limited.status).toBe(403);
+    expect(await limited.json()).toMatchObject({ error: "topic_limit" });
+    expect(createCase).not.toHaveBeenCalled();
+
+    vi.mocked(findTopicCase).mockResolvedValue({ ...record, slug: "cached-case" });
+    expect(await events(await generate(generateRequest("The Rosetta Stone", "198.51.100.8")))).toEqual([{ type: "done", slug: "cached-case" }]);
   });
 
   it("streams progress and finishes with the new case's slug", async () => {
@@ -94,7 +146,7 @@ describe("POST /api/cases/generate", () => {
       { type: "progress", stage: "checking_citations", message: "Checking every quote against the sources" },
       { type: "done", slug: "rosetta" },
     ]);
-    expect(vi.mocked(createCase).mock.calls[0][0]).toMatchObject({ topic: "The Rosetta Stone", kind: "topic" });
+    expect(vi.mocked(createCase).mock.calls[0][0]).toMatchObject({ topic: "The Rosetta Stone", kind: "topic", createdBy: PLAYER.id });
   });
 
   it("returns a cached topic at once without generating or using the rate limit", async () => {

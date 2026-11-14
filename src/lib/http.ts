@@ -4,6 +4,11 @@ export function jsonError(status: number, error: string, message: string): Respo
   return Response.json({ error, message }, { status, headers: NO_STORE });
 }
 
+/** The request carried no valid player token; the client recovers by creating a new player. */
+export function unauthorized(): Response {
+  return jsonError(401, "no_player", "Reload the page to start playing.");
+}
+
 export function json(body: unknown, status = 200): Response {
   return Response.json(body, { status, headers: NO_STORE });
 }
