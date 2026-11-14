@@ -3,6 +3,7 @@ import "server-only";
 import { and, eq, ne, sql } from "drizzle-orm";
 
 import { initialState, scoreOf, type GameAction, type GameState } from "@/lib/game/engine";
+import type { PlayerRecord } from "@/lib/game/rank";
 import { todayDateKey } from "@/lib/time";
 
 import { getDb } from "./client";
@@ -46,6 +47,18 @@ export async function finishedDailyDays(playerId: string): Promise<string[]> {
   return rows.flatMap(({ dateKey, finishedAt }) =>
     dateKey && finishedAt && todayDateKey(finishedAt) === dateKey ? [dateKey] : [],
   );
+}
+
+/** Lifetime totals for the detective rank: finished plays and the sum of their final scores. */
+export async function playerRecord(playerId: string): Promise<PlayerRecord> {
+  const [row] = await getDb()
+    .select({
+      cases: sql<number>`(count(*) filter (where ${plays.status} <> 'in_progress'))::int`,
+      points: sql<number>`(coalesce(sum(${plays.score}) filter (where ${plays.status} <> 'in_progress'), 0))::int`,
+    })
+    .from(plays)
+    .where(eq(plays.playerId, playerId));
+  return { cases: row?.cases ?? 0, points: row?.points ?? 0 };
 }
 
 /**

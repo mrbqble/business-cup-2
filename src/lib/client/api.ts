@@ -1,5 +1,6 @@
 import type { GenerateEvent } from "@/app/api/cases/generate/route";
 import type { CaseSummary, PlayView } from "@/lib/case/view";
+import type { Rank } from "@/lib/game/rank";
 
 import { ensurePlayerToken, forgetPlayerToken } from "./player";
 
@@ -54,6 +55,7 @@ export interface PlayResponse {
 export interface Me {
   player: { id: string; nickname: string; avatar: string };
   streak: number;
+  rank: Rank;
   topicCases: { created: number; free: number };
   today: { slug: string; status: "not_started" | "in_progress" | "solved" | "failed"; score: number | null } | null;
 }
