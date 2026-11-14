@@ -1,6 +1,8 @@
 import { rulesFor, scoreOf, visibleClueIds, type GameState, type GameStatus } from "@/lib/game/engine";
 import { shareGrid } from "@/lib/game/share";
+import type { Exhibit } from "@/lib/sources/exhibits";
 
+import { fallbackNarration } from "./narration";
 import type { CaseCategory, CaseKind, CaseRecord, ClueKind } from "./schema";
 
 export interface CaseSummary {
@@ -11,6 +13,8 @@ export interface CaseSummary {
   title: string;
   category: CaseCategory;
   era: string;
+  /** The primary source's lead image, when it has a free one. */
+  cover: Exhibit | null;
 }
 
 export interface OpenClueView {
@@ -48,8 +52,19 @@ export interface ResultView {
   learned: string[];
 }
 
+/** Comic-panel captions. The closing may state the answer, so it arrives only once the play ends. */
+export interface NarrationView {
+  setting: string;
+  mystery: string;
+  task: string;
+  closing: string | null;
+}
+
 export interface PlayView {
   case: CaseSummary;
+  narration: NarrationView;
+  /** Real archive images from the sources (Wikimedia Commons), with credits and licenses. */
+  exhibits: Exhibit[];
   status: GameStatus;
   score: number;
   livesLeft: number;
@@ -61,7 +76,7 @@ export interface PlayView {
 
 export function summarize(record: CaseRecord): CaseSummary {
   const { slug, number, kind, dateKey, content } = record;
-  return { slug, number, kind, dateKey, title: content.title, category: content.category, era: content.era };
+  return { slug, number, kind, dateKey, title: content.title, category: content.category, era: content.era, cover: record.exhibits[0] ?? null };
 }
 
 /**
@@ -95,8 +110,12 @@ export function buildPlayView(record: CaseRecord, state: GameState): PlayView {
     return { id: h.id, text: h.text, status: "open", refutedByClueId: null };
   });
 
+  const narration = record.narration ?? fallbackNarration(record.content);
+
   return {
     case: summarize(record),
+    narration: { setting: narration.setting, mystery: narration.mystery, task: narration.task, closing: ended ? narration.closing : null },
+    exhibits: record.exhibits,
     status: state.status,
     score: scoreOf(state),
     livesLeft: state.livesLeft,

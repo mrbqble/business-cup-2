@@ -42,6 +42,8 @@ const record: CaseRecord = {
   dateKey: "2026-11-15",
   content: sampleCase(),
   sources: [{ id: "S1", title: sampleSource.title, url: sampleSource.url, revisionId: sampleSource.revisionId }],
+  exhibits: [],
+  narration: null,
 };
 
 const PLAYER: PlayerRow = { id: "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa", nickname: "Curious Otter", avatar: "🦦", tokenHash: "x", createdAt: new Date() };

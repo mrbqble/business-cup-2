@@ -1,0 +1,530 @@
+{
+  "batchcomplete": true,
+  "query": {
+    "pages": [
+      {
+        "ns": 6,
+        "title": "File:Strategic Situation of Western Europe 1815.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 366580,
+            "width": 1260,
+            "height": 975,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Strategic_Situation_of_Western_Europe_1815.jpg/960px-Strategic_Situation_of_Western_Europe_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 619,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Strategic_Situation_of_Western_Europe_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Strategic_Situation_of_Western_Europe_1815.jpg/960px-Strategic_Situation_of_Western_Europe_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 619,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/a/ac/Strategic_Situation_of_Western_Europe_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Strategic_Situation_of_Western_Europe_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Strategic_Situation_of_Western_Europe_1815.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=1488618",
+            "extmetadata": {
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Retour de lIle dElbe-Garneray-IMG 2247.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 1609294,
+            "width": 4444,
+            "height": 3349,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg/960px-Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 603,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg/1920px-Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg/960px-Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 603,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg/1920px-Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/3/37/Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Retour_de_lIle_dElbe-Garneray-IMG_2247.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=18516432",
+            "extmetadata": {
+              "Artist": {
+                "value": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Ambroise_Louis_Garneray\" class=\"extiw\" title=\"w:en:Ambroise Louis Garneray\"><span title=\"French corsair, painter and writer (1783-1857)\">Ambroise Louis Garneray</span></a></bdi>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Part of Belgium engraved by J. Kirkwood.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 4885401,
+            "width": 3174,
+            "height": 2029,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Part_of_Belgium_engraved_by_J._Kirkwood.jpg/960px-Part_of_Belgium_engraved_by_J._Kirkwood.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 511,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Part_of_Belgium_engraved_by_J._Kirkwood.jpg/1920px-Part_of_Belgium_engraved_by_J._Kirkwood.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Part_of_Belgium_engraved_by_J._Kirkwood.jpg/960px-Part_of_Belgium_engraved_by_J._Kirkwood.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 511,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Part_of_Belgium_engraved_by_J._Kirkwood.jpg/1920px-Part_of_Belgium_engraved_by_J._Kirkwood.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Part_of_Belgium_engraved_by_J._Kirkwood.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Part_of_Belgium_engraved_by_J._Kirkwood.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=34773882",
+            "extmetadata": {
+              "Artist": {
+                "value": "William Siborne and  engraved by J. Kirkwood in Dublin",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Napoleonic Wars War of the Seventh Coalition.png",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 35405,
+            "width": 1357,
+            "height": 628,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Napoleonic_Wars_War_of_the_Seventh_Coalition.png/960px-Napoleonic_Wars_War_of_the_Seventh_Coalition.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 370,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Napoleonic_Wars_War_of_the_Seventh_Coalition.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Napoleonic_Wars_War_of_the_Seventh_Coalition.png/960px-Napoleonic_Wars_War_of_the_Seventh_Coalition.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 370,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/f/f1/Napoleonic_Wars_War_of_the_Seventh_Coalition.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Napoleonic_Wars_War_of_the_Seventh_Coalition.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Napoleonic_Wars_War_of_the_Seventh_Coalition.png",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=7712573",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Gabagool\" title=\"User:Gabagool\">Gabagool</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/3.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/png"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Napoleon on Board the Bellerophon - Sir William Quiller Orchardson.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 823005,
+            "width": 1502,
+            "height": 1000,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Napoleon_on_Board_the_Bellerophon_-_Sir_William_Quiller_Orchardson.jpg/960px-Napoleon_on_Board_the_Bellerophon_-_Sir_William_Quiller_Orchardson.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 533,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Napoleon_on_Board_the_Bellerophon_-_Sir_William_Quiller_Orchardson.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Napoleon_on_Board_the_Bellerophon_-_Sir_William_Quiller_Orchardson.jpg/960px-Napoleon_on_Board_the_Bellerophon_-_Sir_William_Quiller_Orchardson.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 533,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/0/0d/Napoleon_on_Board_the_Bellerophon_-_Sir_William_Quiller_Orchardson.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Napoleon_on_Board_the_Bellerophon_-_Sir_William_Quiller_Orchardson.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Napoleon_on_Board_the_Bellerophon_-_Sir_William_Quiller_Orchardson.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=18550889",
+            "extmetadata": {
+              "Artist": {
+                "value": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:William_Quiller_Orchardson\" class=\"extiw\" title=\"w:en:William Quiller Orchardson\"><span title=\"Scottish painter (1832-1910)\">William Quiller Orchardson</span></a></bdi>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Invasion of France in 1815.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 3780652,
+            "width": 1827,
+            "height": 2368,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Invasion_of_France_in_1815.jpg/960px-Invasion_of_France_in_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 1037,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Invasion_of_France_in_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Invasion_of_France_in_1815.jpg/960px-Invasion_of_France_in_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 1037,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/f/f0/Invasion_of_France_in_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Invasion_of_France_in_1815.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Invasion_of_France_in_1815.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=30890644",
+            "extmetadata": {
+              "Artist": {
+                "value": "William Siborne and  engraved by J. Kirkwood in Dublin",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Elba Squadron of 1er régiment de chevau-légers lanciers polonais de la Garde impériale.PNG",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 7187391,
+            "width": 2103,
+            "height": 2659,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG/960px-Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 1012,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG/1920px-Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG/960px-Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 1012,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG/1920px-Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Elba_Squadron_of_1er_r%C3%A9giment_de_chevau-l%C3%A9gers_lanciers_polonais_de_la_Garde_imp%C3%A9riale.PNG",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=14840416",
+            "extmetadata": {
+              "Artist": {
+                "value": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Jan_Che%C5%82mi%C5%84ski\" class=\"extiw\" title=\"w:en:Jan Chełmiński\"><span title=\"Polish artist (1851-1925)\">Jan Chełmiński</span></a></bdi>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/png"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Congress of Vienna.PNG",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 5401481,
+            "width": 1883,
+            "height": 1400,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Congress_of_Vienna.PNG/960px-Congress_of_Vienna.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 595,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/1/17/Congress_of_Vienna.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Congress_of_Vienna.PNG/960px-Congress_of_Vienna.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 595,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/1/17/Congress_of_Vienna.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Congress_of_Vienna.PNG?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Congress_of_Vienna.PNG",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=16173367",
+            "extmetadata": {
+              "Artist": {
+                "value": "<bdi>After <a href=\"https://en.wikipedia.org/wiki/en:Jean-Baptiste_Isabey\" class=\"extiw\" title=\"w:en:Jean-Baptiste Isabey\"><span title=\"French painter (1767-1855)\">Jean-Baptiste Isabey</span></a></bdi>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/3.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/png"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Chateau de Malmaison.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 1050380,
+            "width": 2048,
+            "height": 1536,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Chateau_de_Malmaison.jpg/960px-Chateau_de_Malmaison.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 600,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Chateau_de_Malmaison.jpg/1920px-Chateau_de_Malmaison.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Chateau_de_Malmaison.jpg/960px-Chateau_de_Malmaison.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 600,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Chateau_de_Malmaison.jpg/1920px-Chateau_de_Malmaison.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Chateau_de_Malmaison.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Chateau_de_Malmaison.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=439147",
+            "extmetadata": {
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "http://creativecommons.org/licenses/by-sa/3.0/",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Beaume - Napoléon Ier quittant l'île d'Elbe - 1836.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 572231,
+            "width": 1947,
+            "height": 1152,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg/960px-Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 473,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg/1920px-Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg/960px-Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 473,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg/1920px-Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Beaume_-_Napol%C3%A9on_Ier_quittant_l%27%C3%AEle_d%27Elbe_-_1836.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=6887624",
+            "extmetadata": {
+              "Artist": {
+                "value": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Joseph_Beaume\" class=\"extiw\" title=\"w:en:Joseph Beaume\"><span title=\"French painter (1796–1885)\">Joseph Beaume</span></a></bdi>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:The battles of Napoleon's hundred days.jpg",
+        "missing": true,
+        "known": true,
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 3427909,
+            "width": 1854,
+            "height": 1539,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/The_battles_of_Napoleon%27s_hundred_days.jpg/960px-The_battles_of_Napoleon%27s_hundred_days.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 664,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/4/42/The_battles_of_Napoleon%27s_hundred_days.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/4/42/The_battles_of_Napoleon%27s_hundred_days.jpg/960px-The_battles_of_Napoleon%27s_hundred_days.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 664,
+              "srcset": "//upload.wikimedia.org/wikipedia/commons/4/42/The_battles_of_Napoleon%27s_hundred_days.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/4/42/The_battles_of_Napoleon%27s_hundred_days.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:The_battles_of_Napoleon%27s_hundred_days.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=117622923",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ruedi33a\" title=\"User:Ruedi33a\">Ruedi33a</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      },
+      {
+        "pageid": 18716064,
+        "ns": 6,
+        "title": "File:Napoleon's exile to Elba3.jpg",
+        "imagerepository": "shared",
+        "imageinfo": [
+          {
+            "size": 12770093,
+            "width": 3545,
+            "height": 2910,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Napoleon%27s_exile_to_Elba3.jpg/960px-Napoleon%27s_exile_to_Elba3.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 800,
+            "thumbheight": 657,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Napoleon%27s_exile_to_Elba3.jpg/1920px-Napoleon%27s_exile_to_Elba3.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "//thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Napoleon%27s_exile_to_Elba3.jpg/960px-Napoleon%27s_exile_to_Elba3.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 800,
+              "height": 657,
+              "srcset": "//thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Napoleon%27s_exile_to_Elba3.jpg/1920px-Napoleon%27s_exile_to_Elba3.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
+            "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Napoleon%27s_exile_to_Elba3.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Napoleon%27s_exile_to_Elba3.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=4490502",
+            "extmetadata": {
+              "Artist": {
+                "value": "<div class=\"fn value\">\nUnknown author<span style=\"display: none;\">Unknown author</span></div>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
+          }
+        ]
+      }
+    ]
+  }
+}

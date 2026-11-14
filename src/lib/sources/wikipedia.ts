@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const ENDPOINT = "https://en.wikipedia.org/w/api.php";
+export const WIKIPEDIA_API = "https://en.wikipedia.org/w/api.php";
 /** Wikimedia asks API clients to identify themselves with a way to reach the operator. */
 export const USER_AGENT = "DailyCase/0.1 (https://github.com/mrbqble/business-cup-2)";
 
@@ -72,7 +72,7 @@ export function createWikipediaClient({
   }
 
   async function get(params: Record<string, string>): Promise<unknown> {
-    const url = `${ENDPOINT}?${new URLSearchParams({ format: "json", formatversion: "2", ...params })}`;
+    const url = `${WIKIPEDIA_API}?${new URLSearchParams({ format: "json", formatversion: "2", ...params })}`;
     const response = await fetchImpl(url, {
       headers: { "User-Agent": USER_AGENT },
       signal: AbortSignal.timeout(timeoutMs),
