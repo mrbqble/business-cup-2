@@ -41,7 +41,12 @@ See `.env.example`.
 
 | Name | Purpose |
 |---|---|
-| `AI_PROVIDERS` | Ordered, comma-separated provider names. Only `mock` exists so far. |
+| `AI_PROVIDERS` | Ordered provider chain for case generation (default `claude-sonnet,claude-haiku`; `mock` for tests). |
+| `AI_SAFETY_PROVIDERS` | Provider chain for the topic safety check (default `claude-haiku`). |
+| `ANTHROPIC_API_KEY` | Anthropic API key, used server-side only. |
+| `DATABASE_URL` | Neon Postgres pooled connection string, used at runtime. |
+| `DATABASE_URL_UNPOOLED` | Neon direct connection string for migrations (`npm run db:migrate`). |
+| `VERCEL_PROTECTION_BYPASS` | Optional; lets `scripts/smoke.sh` check protected preview deployments. |
 
 ## AI usage and fallback
 
